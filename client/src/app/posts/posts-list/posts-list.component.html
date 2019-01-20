@@ -1,0 +1,6 @@
+<h1 *ngIf="this.postsTitles.length">Posts:</h1>
+<h1 *ngIf="!this.postsTitles.length">No posts to show!</h1>
+
+<app-post-thumbnail *ngFor="let title of this.postsTitles" [title]="title" [isHighlighted]="title === this.highlightedPostTitle"
+  (getPostTitle)="this.highlightPost($event)">
+</app-post-thumbnail>

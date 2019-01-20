@@ -1,0 +1,15 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <ng-content select=".title"></ng-content>
+    </h4>
+  </div>
+
+  <div class="modal-body">
+    <ng-content select=".body"></ng-content>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="this.modal.close()">Close</button>
+  </div>
+</ng-template>

@@ -1,0 +1,46 @@
+<!-- Template driven forms -->
+<h1>Register</h1>
+<hr>
+<div>
+  <form novalidate 
+    (ngSubmit)="register()"
+    [formGroup]="regForm"
+    >
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input class="form-control" 
+        id="email"
+        type="text"
+        placeholder="email... (required)"
+        formControlName="email"
+        [ngClass]="{'is-invalid': (regForm.get('email').touched ||
+                                 regForm.get('email').dirty) &&
+                                 !regForm.get('email').valid }" />
+
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input class="form-control" #pass
+        id="password"
+        type="text"
+        placeholder="password... (required)"
+        formControlName="password"
+        [ngClass]="{'is-invalid': (regForm.get('password').touched ||
+                                 regForm.get('password').dirty) &&
+                                 !regForm.get('password').valid }" />
+   </div>
+   <div *appLength="pass.value.length">Length should be greater than 5</div>
+      
+    <button class="btn btn-primary mr-3"
+            type="submit"
+            style="width:80px"
+            [title]="regForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+            [disabled]="!regForm.valid">
+      Register</button>
+
+    
+    <button type="button" class="btn btn-default" (click)="this.cancel()">Cancel</button>
+
+  </form>
+</div>

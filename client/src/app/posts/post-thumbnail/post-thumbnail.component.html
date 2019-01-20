@@ -1,0 +1,10 @@
+<div class="card" (click)="this.showPostInfo()" [class.highlight]="this.isHighlighted">
+  <div class="card-body">
+    <h3>{{ this.title }}</h3>
+
+    <app-modal>
+      <div class="title">{{ this.title }}</div>
+      <div class="body"><button class="btn btn-primary" (click)="this.showPostDetails()">Learn more...</button></div>
+    </app-modal>
+  </div>
+</div>

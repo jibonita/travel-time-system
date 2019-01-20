@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <a class="navbar-brand">Time Travel Statistics</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+     
+      <li class="nav-item active" *ngIf="this.isLoggedIn && this.isAdmin">
+        <a class="nav-link" 
+          [routerLink]="['/devices']" 
+          [routerLinkActive]="'active'">Devices</a>
+      </li>
+      <li class="nav-item"  *ngIf="this.isLoggedIn && this.isAdmin">
+        <a class="nav-link"
+        [routerLink]="['/users/all']" 
+        [routerLinkActive]="'active'" 
+        [routerLinkActiveOptions]="{exact: true}">Users</a>
+      </li>
+    <li class="nav-item" *ngIf="this.isLoggedIn && this.isAdmin">
+      <a class="nav-link" 
+        [routerLink]="['/posts']" 
+        [routerLinkActive]="'active'" 
+        [routerLinkActiveOptions]="{exact: true}">Posts</a>
+    </li></ul>
+    
+    
+    <app-search-bar  *ngIf="this.isLoggedIn" class="mr-auto" [searchCallback]="this.searchCallback" [searchPlaceholder]="this.SEARCH_PLACEHOLDER"
+      [defaultSearch]="this.DEFAULT_SEARCH"></app-search-bar>
+
+    <!-- the ng-container is an angular specific that is used to hold directives that
+    do work (like *ngIf and *ngFor) and does not get rendered in the browser
+    https://stackoverflow.com/questions/39547858/angular-2-ng-container -->
+    <ng-container *ngIf="!this.isLoggedIn">
+      <button class="nav-link btn btn-outline-primary my-2 my-sm-0" [routerLink]="['/auth/register']">Register</button>
+      <button class="nav-link btn btn-outline-primary my-2 my-sm-0" [routerLink]="['/auth/login']">Login</button>
+    </ng-container>
+    <ng-container *ngIf="this.isLoggedIn">
+      <button class="nav-link btn btn-outline-primary my-2 my-sm-0" (click)="this.logout()">Logout</button>
+    </ng-container>
+
+  </div>
+</nav>
