@@ -7,11 +7,11 @@ import { UserDataService } from './services/users-data.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [SharedModule, UserRoutingModule, FormsModule, ReactiveFormsModule],
   declarations: [
     UsersListComponent,
     BoldMeDirective,
   ],
+  imports: [SharedModule, UserRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [UserDataService]
 })
 export class UserModule { }

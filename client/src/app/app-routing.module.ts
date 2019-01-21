@@ -16,6 +16,7 @@ const routes: Routes = [
                 },
   { path: 'auth', loadChildren: './auth/auth-routing.module#AuthModule'},
   { path: 'users', loadChildren: './admin/users/user.module#UserModule' },
+  { path: 'devices', loadChildren: './admin/devices/devices.module#DevicesModule' },
 
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },

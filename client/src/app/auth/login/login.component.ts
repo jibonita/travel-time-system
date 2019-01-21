@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
 
-  // Reactive forms
   ngOnInit() {
 
     const email = this.formBuilder.control('pesho@mail.com', [Validators.required]);
