@@ -15,7 +15,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ServerErrorComponent } from './components/server-error/server-errror.component';
 import { ServerErrorInterceptor } from './interceptors/server-error-interceptor.service';
 import { ToastrModule } from 'ngx-toastr';
-import { DevicesComponent } from './components/devices/devices.component';
 import { AuthModule } from './auth/auth-routing.module';
 
 @NgModule({
@@ -25,7 +24,6 @@ import { AuthModule } from './auth/auth-routing.module';
     HomeComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    DevicesComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +34,7 @@ import { AuthModule } from './auth/auth-routing.module';
     CoreModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
-    AuthModule,
+    AuthModule
   ],
   providers: [
     {
