@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { NotificatorService } from '../../core/notificator.service';
@@ -9,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   selector: 'app-register',
   templateUrl: './register.component.html'
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit {
 
   regForm: FormGroup;
 
@@ -25,14 +24,13 @@ export class RegisterComponent implements OnInit{
       email: this.formBuilder.control('pesho@mail.com', [Validators.required]),
       password: this.formBuilder.control('pesho', [Validators.required])
     });
-    
   }
 
   public register(): void {
     this.authService.registerUser(this.regForm.value).subscribe(
       () => {
         this.notificator.success('Registered successfully!');
-        this.router.navigate(['/users/login']);
+        this.router.navigate(['/auth/login']);
       },
       error => {
         console.log(error);

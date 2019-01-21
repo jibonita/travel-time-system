@@ -10,13 +10,12 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
 
-  { path: 'posts', 
-    loadChildren: './posts/posts.module#PostsModule', 
-    canActivate:[AdmnOnlyActivatorService] 
+  { path: 'posts',
+    loadChildren: './posts/posts.module#PostsModule',
+    canActivate: [AdmnOnlyActivatorService]
                 },
   { path: 'auth', loadChildren: './auth/auth-routing.module#AuthModule'},
-  { path: 'users', loadChildren: './user/user.module#UserModule' },
-  //{ path: 'devices', loadChildren: './devices/user.module#UserModule' },
+  { path: 'users', loadChildren: './admin/users/user.module#UserModule' },
 
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },

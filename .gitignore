@@ -43,3 +43,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+ormconfig.js
+config.service.ts
+
+/server/ormconfig.js
+/server/src/config/config.service.ts

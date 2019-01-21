@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { RequesterService } from './requester.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { UserModel } from '../user/models/user.model';
-import * as jwt_decode from "jwt-decode";
+import { UserModel } from '../admin/users/models/user.model';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
@@ -48,7 +48,6 @@ export class AuthService {
           if (this.getDecodedAccessToken(token).isAdmin) {
             this.isAdminSubject$.next(true);
           }
-          
         })
       );
   }
