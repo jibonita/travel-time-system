@@ -32,7 +32,7 @@ import { LengthDirective } from '../directives/length.directive';
     RouterModule.forChild(ROUTES),
   ],
   declarations: [
-    LoginComponent, 
+    LoginComponent,
     RegisterComponent,
     SentenceCasePipe,
     LengthDirective,
