@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "telerik-posts-system": {
+    "travel-time-system": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/telerik-posts-system",
+            "outputPath": "dist/time-travel-system",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "telerik-posts-system:build"
+            "browserTarget": "travel-time-system:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "telerik-posts-system:build:production"
+              "browserTarget": "travel-time-system:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "telerik-posts-system:build"
+            "browserTarget": "travel-time-system:build"
           }
         },
         "test": {
@@ -105,7 +105,7 @@
         }
       }
     },
-    "telerik-posts-system-e2e": {
+    "travel-time-system-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -114,11 +114,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "telerik-posts-system:serve"
+            "devServerTarget": "travel-time-system:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "telerik-posts-system:serve:production"
+              "devServerTarget": "travel-time-system:serve:production"
             }
           }
         },
@@ -134,5 +134,5 @@
       }
     }
   },
-  "defaultProject": "telerik-posts-system"
+  "defaultProject": "travel-time-system"
 }
