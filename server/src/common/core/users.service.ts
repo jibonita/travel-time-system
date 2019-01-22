@@ -54,7 +54,7 @@ export class UsersService {
   }
 
   async getAll(admin: User) {
-    return await this.usersRepository.find({ where: { adminUser: admin } });
+    return await this.usersRepository.find({select: ['email'], where: { adminUser: admin } });
   }
 
   async addUser(user: UserRegisterDTO, admin: User) {
