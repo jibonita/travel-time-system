@@ -37,6 +37,12 @@ export class AuthService {
       JSON.stringify(user)
     );
   }
+  public registerTechUser(user: UserModel): Observable<any> {
+    return this.requester.post(
+      'http://localhost:3000/users',
+      JSON.stringify(user)
+    );
+  }
 
   public loginUser(user: UserModel): Observable<any> {
     return this.requester
