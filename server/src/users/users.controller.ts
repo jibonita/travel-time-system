@@ -36,7 +36,7 @@ export class UsersController {
     }
   }
 
-  @Delete()
+  @Post('/create')
   @UseGuards(AuthGuard(), AdminGuard)
   async delete(@Request() req,
                @Body(new ValidationPipe({
