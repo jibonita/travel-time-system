@@ -1,5 +1,5 @@
 <app-device-add></app-device-add>
 
-<p>
-  devices-list works!
-</p>
+<div *ngFor="let device of this.devicesList">
+  {{ device.name }}
+</div>

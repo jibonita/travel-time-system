@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { DevicesService } from '../services/devices.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-device-add',
@@ -11,16 +13,23 @@ export class DeviceAddComponent implements OnInit {
   addDeviceForm: FormGroup;
   closeResult: string;
 
-  constructor(private modalService: NgbModal,
-    private readonly formBuilder: FormBuilder
+  constructor(
+    private readonly formBuilder: FormBuilder,
+    private readonly devicesService: DevicesService,
+    private readonly notificator: ToastrService,
     ) {}
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  private addDevice() {
+    this.devicesService.addDevice(this.addDeviceForm.value).subscribe(
+      () => {
+        this.notificator.success('Device added successfully!');
+        // close modal
+      },
+      error => {
+        console.log(error);
+        //this.notificator.error(error.message, 'Device add failed!');
+      }
+    );
   }
 
   private getDismissReason(reason: any): string {
@@ -34,11 +43,11 @@ export class DeviceAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    const deviceName = this.formBuilder.control('', [Validators.required]);
-    const longitude = this.formBuilder.control('', [Validators.required]);
-    const latitude = this.formBuilder.control('', [Validators.required]);
+    const name = this.formBuilder.control('Palacio Valdes, Salamanca', [Validators.required]);
+    const longitude = this.formBuilder.control('40.971409', [Validators.required]);
+    const latitude = this.formBuilder.control(' -5.669503', [Validators.required]);
     this.addDeviceForm = this.formBuilder.group({
-      deviceName,
+      name,
       longitude,
       latitude
     });
