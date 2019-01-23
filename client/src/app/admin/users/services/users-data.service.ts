@@ -10,4 +10,8 @@ export class UserDataService {
   public getAllUsers(): Observable<UserModel[]> {
     return this.requester.get('http://localhost:3000/users');
   }
+
+  public deleteUser(user: UserModel): Observable<UserModel> {
+    return this.requester.delete('http://localhost:3000/users');
+  }
 }

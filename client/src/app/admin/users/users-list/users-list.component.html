@@ -1,3 +1,25 @@
 <h1>Users List</h1>
 
 <app-register-tech-user></app-register-tech-user>
+
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of usersList; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <th scope="row">{{user.email}}</th>
+        <th scope="row">
+            <button type="button" class="btn btn-danger">Delete</button>
+        </th>
+      </tr>
+      
+    </tbody>
+  </table>
