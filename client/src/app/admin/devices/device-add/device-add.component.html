@@ -5,7 +5,7 @@
 <!-- (click)="open(formModal)" -->
 
 <!-- <ng-template #content let-modal> -->
-<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="theModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -15,6 +15,7 @@
           </button>
         </div>
         <div class="modal-body">
+         
           <form [formGroup]="addDeviceForm" (ngSubmit)="addDevice()">
             <div class="form-group">
               <label  for="name">Name</label>
@@ -47,15 +48,18 @@
                 formControlName="latitude" 
             />
             </div>
+            <app-street-map></app-street-map>
 
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button 
               [disabled]="this.addDeviceForm.invalid" type="submit" class="btn btn-primary"  
                >Save</button>
                <!-- (click)="modal.close('Save click')"  -->
-             
+
+            
             
           </form>
+
         </div>
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->

@@ -6,11 +6,13 @@ import { DevicesListComponent } from './devices-list/devices-list.component';
 import { DeviceAddComponent } from './device-add/device-add.component';
 import { SentenceCasePipe } from 'src/app/pipes/sentence-case.pipe';
 import { DevicesService } from './services/devices.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [DevicesListComponent, DeviceAddComponent],
   imports: [
     CommonModule,
+    SharedModule,
     DevicesRoutingModule,
     ReactiveFormsModule
   ],
