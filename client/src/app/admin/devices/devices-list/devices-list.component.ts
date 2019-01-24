@@ -38,12 +38,16 @@ export class DevicesListComponent implements OnInit {
       () => {
         const index = this.devicesList.indexOf(device);
         this.devicesList.splice(index, 1);
-        this.notificator.success('User deleted successfully!');
+        this.notificator.success('Device deleted successfully!');
       },
       error => {
         console.log(error);
-        this.notificator.error(error.error.message, 'User already deleted');
+        this.notificator.error(error.error.message, 'Device already deleted');
       }
     );
+  }
+
+  editDevice(device){
+    console.log('Not implemented');
   }
 }
