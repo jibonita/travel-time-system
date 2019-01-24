@@ -1,3 +1,4 @@
+import { DevicesModule } from './../devices/devices.module';
 import { BoldMeDirective } from '../../directives/bold.directive';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
@@ -7,6 +8,7 @@ import { UserDataService } from './services/users-data.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterTechUserComponent } from './register-tech-user/register-tech-user.component';
 import { AssignDeviceComponent } from './assign-device/assign-device.component';
+import { DevicesService } from '../devices/services/devices.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,7 @@ import { AssignDeviceComponent } from './assign-device/assign-device.component';
     RegisterTechUserComponent,
     AssignDeviceComponent,
   ],
-  imports: [SharedModule, UserRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, UserRoutingModule, FormsModule, ReactiveFormsModule, DevicesModule],
   providers: [UserDataService]
 })
 export class UserModule { }
