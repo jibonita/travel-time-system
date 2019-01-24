@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DevicesService } from '../services/devices.service';
 import { ToastrService } from 'ngx-toastr';
+import { DeviceModel } from '../models/device.model';
 
 @Component({
   selector: 'app-device-add',
@@ -10,8 +11,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./device-add.component.css']
 })
 export class DeviceAddComponent implements OnInit {
+
   addDeviceForm: FormGroup;
   closeResult: string;
+
+  @Output() public newDevice = new EventEmitter<FormGroup>();
+  public emitNewDeviceAddedEvent(value): void {
+    this.newDevice.emit(value);
+  }
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -20,14 +27,16 @@ export class DeviceAddComponent implements OnInit {
     ) {}
 
   private addDevice() {
+
     this.devicesService.addDevice(this.addDeviceForm.value).subscribe(
       () => {
-        this.notificator.success('Device added successfully!');
-        // close modal
+        // this.notificator.success('Device added successfully!');
+        this.emitNewDeviceAddedEvent(this.addDeviceForm.value);
+        // TODO: close modal
       },
       error => {
         console.log(error);
-        //this.notificator.error(error.message, 'Device add failed!');
+        // this.notificator.error(error.message, 'Device add failed!');
       }
     );
   }
@@ -52,5 +61,7 @@ export class DeviceAddComponent implements OnInit {
       latitude
     });
   }
+
+
 
 }

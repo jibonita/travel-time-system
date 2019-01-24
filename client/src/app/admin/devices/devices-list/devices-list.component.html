@@ -1,5 +1,6 @@
-<app-device-add></app-device-add>
+<app-device-add (newDevice)="this.updateList($event)"></app-device-add>
 
 <div *ngFor="let device of this.devicesList">
   {{ device.name }}
 </div>
+

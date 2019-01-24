@@ -10,13 +10,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DevicesListComponent implements OnInit {
   devicesList: DeviceModel[];
-
+  
   constructor(
     private readonly devicesService: DevicesService,
     private readonly notificator: ToastrService,
 
   ) { }
 
+ 
   ngOnInit() {
     this.devicesService.getAllDevices().subscribe(
       (data) => {
@@ -28,4 +29,7 @@ export class DevicesListComponent implements OnInit {
     );
   }
 
+  updateList(event){
+    this.devicesList.push(event);
+  }
 }
