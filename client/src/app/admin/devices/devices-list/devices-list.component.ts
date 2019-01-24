@@ -10,14 +10,14 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DevicesListComponent implements OnInit {
   devicesList: DeviceModel[];
-  
+
   constructor(
     private readonly devicesService: DevicesService,
     private readonly notificator: ToastrService,
 
   ) { }
 
- 
+
   ngOnInit() {
     this.devicesService.getAllDevices().subscribe(
       (data) => {
@@ -29,7 +29,21 @@ export class DevicesListComponent implements OnInit {
     );
   }
 
-  updateList(event){
+  updateList(event) {
     this.devicesList.push(event);
+  }
+
+  deleteDevice(device): void {
+    this.devicesService.deleteDevice(device.id).subscribe(
+      () => {
+        const index = this.devicesList.indexOf(device);
+        this.devicesList.splice(index, 1);
+        this.notificator.success('User deleted successfully!');
+      },
+      error => {
+        console.log(error);
+        this.notificator.error(error.error.message, 'User already deleted');
+      }
+    );
   }
 }

@@ -17,4 +17,8 @@ export class DevicesService {
   public addDevice(device: DeviceModel): Observable<DeviceModel[]> {
     return this.requester.post('http://localhost:3000/devices', JSON.stringify(device));
   }
+
+  public deleteDevice(id): Observable<DeviceModel[]> {
+    return this.requester.delete('http://localhost:3000/devices/' + id);
+  }
 }
