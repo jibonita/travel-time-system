@@ -2,24 +2,26 @@
 
 <app-register-tech-user></app-register-tech-user>
 
-
-
 <table class="table">
     <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Action</th>
-      </tr>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Action</th>
+            <th scope="col">Assign Device</th>
+        </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of usersList; let i = index">
-        <th scope="row">{{i+1}}</th>
-        <th scope="row">{{user.email}}</th>
-        <th scope="row">
-            <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
-        </th>
-      </tr>
-      
+        <tr *ngFor="let user of usersList; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <th scope="row">{{user.email}}</th>
+            <th scope="row">
+                <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+            </th>
+            <th>
+                <app-assign-device></app-assign-device>
+            </th>
+        </tr>
+
     </tbody>
-  </table>
+</table>
