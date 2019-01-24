@@ -1,11 +1,12 @@
 import { UpdateDeviceDTO } from './../models/devices/update-device.dto';
 import { CreateDeviceDTO } from '../models/devices/create-device.dto';
 import { Injectable, BadRequestException, HttpException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Device } from 'src/data/entities/device.entity';
 import { User } from 'src/data/entities/user.entity';
 import { TableReport } from 'src/data/entities/table-report.entity';
+import { AssignDeviceDTO } from 'src/models/devices/assign-device.dto';
 
 @Injectable()
 export class DevicesService {
@@ -15,7 +16,7 @@ export class DevicesService {
         @InjectRepository(User)
         private readonly usersRepository: Repository<User>,
         @InjectRepository(TableReport)
-        private readonly tableReportsRepository: Repository<TableReport>) { }
+        private readonly tableReportsRepository: Repository<TableReport>,) { }
 
     async create(user: User, device: CreateDeviceDTO): Promise<Device> {
         if (!user.isAdmin) {
@@ -39,6 +40,27 @@ export class DevicesService {
         await this.devicesRepository.save([createdDevice]);
 
         return createdDevice;
+    }
+
+    async assign(assignDTO: AssignDeviceDTO): Promise<any> {
+        const userEmail: string = assignDTO.user;
+        const userFound = await this.usersRepository.findOne({ where: { email: userEmail } });
+        if (!userFound) {
+            throw new Error('User does not exist');
+          }
+          
+        const devices = await this.devicesRepository
+            .find({
+                where: { id: In(assignDTO.devices) }
+            });
+             
+        await Promise.all(devices.map(async (device) => {
+            device.users.push(userFound);
+            await this.devicesRepository.update(device.id, device);
+            await this.devicesRepository.save([device]);
+        }));
+
+        return userFound;
     }
 
     async findAll(req): Promise<Device[]> {
@@ -112,5 +134,9 @@ export class DevicesService {
     private async foundDevice(query: object) {
 
         return await this.devicesRepository.findOne(query);
+    }
+    private async foundDevicesIn(query: any) {
+
+        return await this.devicesRepository.findByIds(query);
     }
 }

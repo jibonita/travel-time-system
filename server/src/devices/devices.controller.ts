@@ -6,6 +6,7 @@ import { CreateDeviceDTO } from 'src/models/devices/create-device.dto';
 import { AuthGuard } from '@nestjs/passport/dist/auth.guard';
 import { AdminGuard } from 'src/common/guards/roles/admin.guard';
 import { Device } from 'src/data/entities/device.entity';
+import { AssignDeviceDTO } from 'src/models/devices/assign-device.dto';
 @Controller('devices')
 export class DevicesController {
 
@@ -29,6 +30,20 @@ export class DevicesController {
 
         try {
             return await this.devicesService.create(req.user, createDeviceDTO);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.CONFLICT);
+        }
+    }
+
+    @Post('assign')
+    @UseGuards(AuthGuard('jwt'), AdminGuard)
+    async assign(@Request() req, @Body(new ValidationPipe({
+        whitelist: true,
+        transform: true,
+    })) assignDeviceDTO: AssignDeviceDTO): Promise<Device> {
+
+        try {
+            return await this.devicesService.assign(assignDeviceDTO);
         } catch (error) {
             throw new HttpException(error.message, HttpStatus.CONFLICT);
         }

@@ -20,6 +20,6 @@ export class Device {
     @ManyToMany(type => TableReport, tableReport => tableReport.devices)
     tableReports: TableReport[];
 
-    @ManyToMany(type => User, user => user.devices)
+    @ManyToMany(type => User, user => user.devices, {eager: true})
     users: User[];
 }
