@@ -14,15 +14,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customCheck1">
-          <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+
+      <div class="modal-body" *ngFor="let device of deviceList; let i = index"
+      >
+        <div class="custom-control custom-checkbox" >
+          <input [(ngModel)]="device.isActive" type="checkbox" class="custom-control-input" [id]="device.name">
+          <label class="custom-control-label" [for]="device.name"
+          
+          >{{device.name}}</label>
         </div>
       </div>
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="addMultipleDevices(deviceList)">Save changes</button>
       </div>
     </div>
   </div>
