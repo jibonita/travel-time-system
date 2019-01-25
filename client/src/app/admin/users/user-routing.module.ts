@@ -1,33 +1,15 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { UsersListComponent } from './users-list/users-list.component';
-import { AuthRouteActivatorService } from '../../core/route-guards/auth-route-activator.service';
-import { AnonymousRouteActivatorService } from '../../core/route-guards/anonymous-route-activator.service';
+import { AdmnOnlyActivatorService } from 'src/app/core/route-guards/admin-only-route-activator.service';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
    component: UsersListComponent,
-   canActivate: [AuthRouteActivatorService]
+   canActivate: [AdmnOnlyActivatorService]
  },
-  // { path: '', redirectTo: '/users', pathMatch: 'full' },
-  // {
-  //   path: 'all',
-  //   component: UsersListComponent,
-  //   canActivate: [AuthRouteActivatorService]
-  // },
-
-  // {
-  //   path: 'login',
-  //   component: LoginComponent,
-  //   canActivate: [AnonymousRouteActivatorService]
-  // },
-  // {
-  //   path: 'register',
-  //   component: RegisterComponent,
-  //   canActivate: [AnonymousRouteActivatorService]
-  // }
 ];
 
 @NgModule({
