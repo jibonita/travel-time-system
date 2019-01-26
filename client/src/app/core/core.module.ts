@@ -1,3 +1,4 @@
+import { MapService } from './map.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { RequesterService } from './requester.service';
 import { StorageService } from './storage.service';
@@ -16,8 +17,9 @@ import { AdmnOnlyActivatorService } from './route-guards/admin-only-route-activa
     AuthService,
     SearchService,
     AuthRouteActivatorService,
-    AnonymousRouteActivatorService, 
-    AdmnOnlyActivatorService
+    AnonymousRouteActivatorService,
+    AdmnOnlyActivatorService,
+    MapService
   ]
 })
 export class CoreModule {
