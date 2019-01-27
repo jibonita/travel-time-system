@@ -5,18 +5,19 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SharedModule } from './shared/shared.module';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { AuthInterceptor } from './interceptors/auth-interceptor.service';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { ServerErrorComponent } from './components/server-error/server-errror.component';
 import { ServerErrorInterceptor } from './interceptors/server-error-interceptor.service';
-import { ToastrModule } from 'ngx-toastr';
 import { AuthModule } from './auth/auth-routing.module';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ServerErrorComponent } from './components/server-error/server-errror.component';
+import { ReportsLandingComponent } from './components/reports-landing/reports-landing.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthModule } from './auth/auth-routing.module';
     HomeComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    ReportsLandingComponent,
   ],
   imports: [
     BrowserModule,
