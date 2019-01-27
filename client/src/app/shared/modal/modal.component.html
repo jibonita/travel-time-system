@@ -10,6 +10,7 @@
   </div>
 
   <div class="modal-footer">
+    <ng-content select=".footer"></ng-content>
     <button type="button" class="btn btn-outline-dark" (click)="this.modal.close()">Close</button>
   </div>
 </ng-template>

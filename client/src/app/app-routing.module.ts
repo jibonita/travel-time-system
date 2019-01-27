@@ -8,9 +8,9 @@ import { AdmnOnlyActivatorService } from './core/route-guards/admin-only-route-a
 import { ReportsLandingComponent } from './components/reports-landing/reports-landing.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'reports-landing', component: ReportsLandingComponent,
+  { path: 'landing', component: ReportsLandingComponent,
     canActivate: [AuthRouteActivatorService] },
   { path: 'posts',
     loadChildren: './posts/posts.module#PostsModule',

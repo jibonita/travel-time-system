@@ -1,3 +1,4 @@
+import { DevicesService } from 'src/app/admin/devices/services/devices.service';
 import { ListReportsComponent } from './list-reports/list-reports.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,6 +13,7 @@ import { TableReportComponent } from './table-report/table-report.component';
     CommonModule,
     SharedModule, ReactiveFormsModule
   ],
+  providers: [DevicesService],
   exports: [NewReportComponent, ListReportsComponent]
 })
 export class ReportsModule { }
