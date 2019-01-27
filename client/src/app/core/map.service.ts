@@ -30,7 +30,7 @@ export class MapService {
                         contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,
                         Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
         maxZoom: 18,
-        id: "mapbox.streets",
+        id: 'mapbox.streets',
         accessToken: mapBoxToken
       }
     ).addTo(streetMap);

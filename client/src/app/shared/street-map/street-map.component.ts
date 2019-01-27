@@ -12,8 +12,9 @@ export class StreetMapComponent implements OnInit {
   constructor(private readonly mapService: MapService) {}
 
   ngOnInit() {
-    const streetMap = this.mapService.initMap(this.defaultLatLon, 13);
- }
+    if (!this.mapService.getMap){
+      this.mapService.initMap(this.defaultLatLon, 13);
+    }
+  }
 
-  
 }
