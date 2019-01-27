@@ -48,6 +48,11 @@ export class DevicesListComponent implements OnInit {
   }
 
   editDevice(device){
-    console.log('Not implemented');
+    console.log('Edit');
   }
+
+  setDisplay(state){
+    return state;
+  }
+  
 }

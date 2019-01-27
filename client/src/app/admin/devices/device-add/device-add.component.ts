@@ -2,12 +2,10 @@ import { MapService } from 'src/app/core/map.service';
 import {
   Component,
   OnInit,
-  OnDestroy,
-  OnChanges,
-  SimpleChanges,
   Output,
   EventEmitter,
-  AfterViewInit
+  AfterViewInit,
+  Input
 } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -24,7 +22,10 @@ export class DeviceAddComponent implements OnInit, AfterViewInit {
  
   addDeviceForm: FormGroup;
   closeResult: string;
-
+  title: string;
+  @Input() isAddDevice: boolean;
+  //action = this.isAddDevice ? 'New Device' : 'Edit Device';
+  
   @Output() public newDevice = new EventEmitter<FormGroup>();
   public emitNewDeviceAddedEvent(value): void {
     this.newDevice.emit(value);
@@ -37,48 +38,41 @@ export class DeviceAddComponent implements OnInit, AfterViewInit {
     private readonly mapService: MapService
   ) {}
 
-  private addDevice() {
-    console.log(this.addDeviceForm.value)
-    this.devicesService.addDevice(this.addDeviceForm.value).subscribe(
-      () => {
-        // this.notificator.success('Device added successfully!');
-        this.emitNewDeviceAddedEvent(this.addDeviceForm.value);
-        // TODO: close modal
-      },
-      error => {
-        console.log(error);
-        // this.notificator.error(error.message, 'Device add failed!');
-      }
-    );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
   ngOnInit() {
-    const name = this.formBuilder.control('Palacio Valdes, Salamanca', [     Validators.required    ]);
-    const longitude = this.formBuilder.control('40.971409', [      Validators.required    ]);
-    const latitude = this.formBuilder.control(' -5.669503', [      Validators.required    ]);
+    const name = this.formBuilder.control(
+      this.isAddDevice ? this.addDevice.name : ''
+      , [Validators.required]);
+    const longitude = this.formBuilder.control('', [Validators.required]);
+    const latitude = this.formBuilder.control('', [Validators.required]);
     this.addDeviceForm = this.formBuilder.group({
       name,
       longitude,
       latitude
     });
-
+    
+    console.log(this.isAddDevice)
   }
 
   ngAfterViewInit(): void {
+    this.title = this.isAddDevice ? 'Edit Device' : 'New Device' ;
     this.mapService.getMap.on('click', (e) => {
       this.getLonLat(e);
     });
   }
+
+  addDevice() {
+    this.devicesService.addDevice(this.addDeviceForm.value).subscribe(
+       () => {
+         // this.notificator.success('Device added successfully!');
+         this.emitNewDeviceAddedEvent(this.addDeviceForm.value);
+         // TODO: close modal
+       },
+       error => {
+         console.log(error);
+         this.notificator.error(error.message, 'Device add failed!');
+       }
+     );
+   }
 
   getLonLat(event) {
     const [lat, lon] = this.mapService.getMapLatLon(event);

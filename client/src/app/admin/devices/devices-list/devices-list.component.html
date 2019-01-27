@@ -1,4 +1,4 @@
-<app-device-add (newDevice)="this.updateList($event)"></app-device-add>
+<app-device-add (newDevice)="this.updateList($event)" [isAddDevice]="setDisplay(false)" ></app-device-add>
 
 <table class="table">
   <thead>
@@ -18,7 +18,7 @@
       <td>{{device.latitude}}</td>
       <td>  
         <button type="button" class="btn btn-danger" (click)="deleteDevice(device)">Delete</button>
-        <button type="button" class="btn btn-warning" (click)="editDevice(device)">Edit</button>
+        <app-device-add (newDevice)="this.updateList($event)" [isAddDevice]="setDisplay(device)"></app-device-add>
       </td>
     </tr>
   </tbody>

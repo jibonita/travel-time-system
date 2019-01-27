@@ -1,8 +1,13 @@
-<button class="btn btn-lg btn-outline-primary" 
+<button *ngIf="!isAddDevice"
+  class="btn btn-lg btn-outline-primary" 
   data-toggle="modal" 
   data-target="#formModal" 
-  data-whatever="@getbootstrap" >Add Device</button>
-<!-- (click)="open(formModal)" -->
+  data-whatever="@getbootstrap" >Add Device </button>
+<button *ngIf="!!isAddDevice" 
+  class="btn btn-warning" 
+  data-toggle="modal" 
+  data-target="#formModal" >Edit</button>
+<!-- (click)="editDevice(device)" (click)="open(formModal)" -->
 
 <!-- <ng-template #content let-modal> -->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" 
@@ -10,14 +15,14 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">New Device</h4>
+          <h4 class="modal-title" id="modal-basic-title">{{ title }}</h4>
           <button type="button" class="close" aria-label="Close" data-dismiss="modal" >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
          
-          <form [formGroup]="addDeviceForm" (ngSubmit)="addDevice()">
+          <form [formGroup]="addDeviceForm" >  <!-- (ngSubmit)="addDevice()" -->
             <div class="form-group">
               <label  for="name">Name</label>
               <input  required 
@@ -54,7 +59,12 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button 
               [disabled]="this.addDeviceForm.invalid" type="submit" class="btn btn-primary"  
+              (click)="addDevice()"
                >Save</button>
+            <button 
+               [disabled]="this.addDeviceForm.invalid" type="submit" class="btn btn-primary"  
+               (click)="editDevice()"
+                >Update</button>
                <!-- (click)="modal.close('Save click')"  -->
 
             
