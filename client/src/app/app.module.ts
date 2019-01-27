@@ -18,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ServerErrorComponent } from './components/server-error/server-errror.component';
 import { ReportsLandingComponent } from './components/reports-landing/reports-landing.component';
+import { ReportsModule } from './reports/reports.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ReportsLandingComponent } from './components/reports-landing/reports-la
     CoreModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
-    AuthModule
+    AuthModule,
+    ReportsModule
   ],
   providers: [
     {

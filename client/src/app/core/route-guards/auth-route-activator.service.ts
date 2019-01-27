@@ -17,7 +17,7 @@ export class AuthRouteActivatorService implements CanActivate {
     return this.authService.isLoggedIn$.pipe(
       tap((isLogged: boolean) => {
         if (!isLogged) {
-          this.router.navigate(['/users/login']);
+          this.router.navigate(['/auth/login']);
           this.notificator.error(
             'You must be logged-in in order to see this page!'
           );

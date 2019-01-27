@@ -5,11 +5,13 @@ import { NgModule } from '@angular/core';
 import { ServerErrorComponent } from './components/server-error/server-errror.component';
 import { AuthRouteActivatorService } from './core/route-guards/auth-route-activator.service';
 import { AdmnOnlyActivatorService } from './core/route-guards/admin-only-route-activator.service';
+import { ReportsLandingComponent } from './components/reports-landing/reports-landing.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-
+  { path: 'reports-landing', component: ReportsLandingComponent,
+    canActivate: [AuthRouteActivatorService] },
   { path: 'posts',
     loadChildren: './posts/posts.module#PostsModule',
     canActivate: [AdmnOnlyActivatorService]
