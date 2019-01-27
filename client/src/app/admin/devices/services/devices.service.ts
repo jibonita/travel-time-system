@@ -21,4 +21,9 @@ export class DevicesService {
   public deleteDevice(id): Observable<DeviceModel[]> {
     return this.requester.delete('http://localhost:3000/devices/' + id);
   }
+  public assignDevice(user, devices): Observable<any> {
+    console.log(user + '---------------------');
+    console.log(devices + '---------------------');
+    return this.requester.post('http://localhost:3000/devices/assign', JSON.stringify(user), devices);
+  }
 }
