@@ -17,7 +17,7 @@ export class TableReportsService {
         private readonly devicesRepository: Repository<Device>,
     ) { }
 
-    async getTableReportById(tableId: string): Promise<TableReport> {
+    async getTableReportById(tableId: string): Promise<any> {
 
         return await this.tableReportsRepository.findOne({ where: { id: tableId } });
     }
