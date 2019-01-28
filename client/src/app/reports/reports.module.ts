@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewReportComponent } from './new-report/new-report.component';
 import { TableReportComponent } from './table-report/table-report.component';
+import { TableReportService } from './services/table-report.service';
 
 @NgModule({
   declarations: [ListReportsComponent, NewReportComponent, TableReportComponent],
@@ -13,7 +14,7 @@ import { TableReportComponent } from './table-report/table-report.component';
     CommonModule,
     SharedModule, ReactiveFormsModule
   ],
-  providers: [DevicesService],
+  providers: [DevicesService, TableReportService],
   exports: [NewReportComponent, ListReportsComponent]
 })
 export class ReportsModule { }
