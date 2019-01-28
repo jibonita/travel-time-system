@@ -1,3 +1,5 @@
+import { TableReportModel } from './../models/table-report.model';
+import { TableReportService } from './../services/table-report.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-reports.component.css']
 })
 export class ListReportsComponent implements OnInit {
+  reportsList: TableReportModel[];
 
-  constructor() { }
+  constructor(
+    private readonly tableReportService: TableReportService
+  ) { }
 
   ngOnInit() {
+
+      this.tableReportService.getTableReports().subscribe(
+        (data) => {
+          this.reportsList = data;
+        }
+      );
   }
 
 }
