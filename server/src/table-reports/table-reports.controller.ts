@@ -18,10 +18,16 @@ export class TableReportsController {
     private readonly apiService: ApiService,
   ) { }
 
-  @Get()
+/*   @Get()
   @UseGuards(AuthGuard())
   async allTableReports(): Promise<TableReport[]> {
     return await this.tableReportsService.getTableReports();
+  } */
+
+  @Get()
+  @UseGuards(AuthGuard())
+  async currentUserTableReports(@Request() req): Promise<TableReport[]> {
+    return await this.tableReportsService.getCurrentUserTableReports(req.user);
   }
 
   @Post()

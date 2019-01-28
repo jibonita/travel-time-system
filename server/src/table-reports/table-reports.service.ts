@@ -26,6 +26,10 @@ export class TableReportsService {
         return await this.tableReportsRepository.find();
     }
 
+    async getCurrentUserTableReports(currentUser: User): Promise<TableReport[]> {
+        return await this.tableReportsRepository.find({ where: { user: currentUser } });
+    }
+
     async confirmCurrentUser(userLogged, tableUser) {
         if (userLogged !== tableUser) {
             throw new Error('Action not permitted! This is not your table.');
@@ -41,7 +45,8 @@ export class TableReportsService {
 
         const startDate: number = endDate - (tableReportDTO.period * 3600 * 1000);
 
-        const devices: Device[] = await this.devicesRepository.find({ where: { name: In(tableReportDTO.deviceNames) } });
+        //const devices: Device[] = await this.devicesRepository.find({ where: { name: In(tableReportDTO.deviceNames) } });
+        const devices: Device[] = await this.devicesRepository.find({ where: { id: In(tableReportDTO.deviceIDs) } });
 
         const tableReport: TableReport = new TableReport();
         tableReport.name = tableReportDTO.name;
