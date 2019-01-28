@@ -34,7 +34,12 @@ export class TableReportsController {
   @UseGuards(AuthGuard())
   async create(@Request() req, @Body() tableReportDTO: CreateTableReportDTO) {
     const tableReport = await this.tableReportsService.createTableReport(tableReportDTO, req.user);
-    return await this.apiService.tableReport(tableReport);
+    try {
+      return await this.apiService.tableReport(tableReport);
+    } catch (error) {
+      throw new Error(error.message)
+    }
+    
   }
 
   @Put(':id')
