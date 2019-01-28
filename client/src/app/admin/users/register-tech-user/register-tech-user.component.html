@@ -1,8 +1,60 @@
-<button type="button" class="btn btn-lg btn-outline-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Register new User</button>
+<div class="card"  (click)="showUserForm()" [class.highlight]="this.isHighlighted">
+  <button class="btn btn-lg btn-outline-primary" >Register new User</button>
+  <div class="card-body">
+      <app-modal>
+          <div class="title">New User
+            </div>
+      
+            <div class="body">
+              <form 
+              (ngSubmit)="register()"
+              [formGroup]="regForm">
+      
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Email:</label>
+                  <input type="text" 
+                  class="form-control" 
+                  id="recipient-name" 
+                  placeholder="example.email@gmail.com"
+                  formControlName="email"
+                  [ngClass]="{'is-invalid': (regForm.get('email').touched ||
+                                       regForm.get('email').dirty) &&
+                                       !regForm.get('email').valid }">
+                </div>
+      
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Password:</label>
+                  <input type="password" 
+                  class="form-control" 
+                  id="password" 
+                  placeholder="Password"
+                  formControlName="password"
+                  [ngClass]="{'is-invalid': (regForm.get('password').touched ||
+                                       regForm.get('password').dirty) &&
+                                       !regForm.get('password').valid }">
+                </div>
+              </form>
+            </div>
+      
+            <div class="footer">
+              <button type="button" class="btn btn-primary" 
+              (click)="register()"
+              [title]="regForm.valid ? 'Register new user' : 'Disabled until the form data is valid'"
+              [disabled]="!regForm.valid">
+              Register</button>
+            </div>
+      </app-modal>
+  </div>
+</div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <button type="button" class="btn btn-lg btn-outline-primary" 
+data-toggle="modal" data-target="#exampleModal" 
+data-whatever="@getbootstrap">Register new User</button> -->
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">New User</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -52,5 +104,5 @@
       
     </div>
   </div>
-</div>
+</div> -->
 
