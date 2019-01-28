@@ -1,5 +1,5 @@
 import { TableReportService } from './../services/table-report.service';
-import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { МodalComponent } from 'src/app/shared/modal/modal.component';
 import { DevicesService } from 'src/app/admin/devices/services/devices.service';
@@ -43,13 +43,13 @@ export class NewReportComponent implements OnInit {
         this.addTableReportForm.removeControl('selectedDevices');
         this.addTableReportForm.addControl('selectedDevices',
             new FormArray(
-              this.deviceList.map(c => new FormControl(false))
+              this.deviceList.map(c => new FormControl(false), this.minSelectedCheckboxes(2))
             )
         );
     });
 
     const name = this.formBuilder.control('', [Validators.required]);
-    const period = this.formBuilder.control(this.periods[1], [Validators.required]);
+    const period = this.formBuilder.control('', [Validators.required]);
     const deviceSearch = this.formBuilder.control('');
 
     const selectedDevices = new FormArray(
@@ -70,17 +70,9 @@ export class NewReportComponent implements OnInit {
   }
 
   createReport() {
-    this.modal.close();
-    
-    const selectedDevicesIds = this.addTableReportForm.value.selectedDevices
-    .map((v, i) => v ? this.deviceList[i].id : null)
-    .filter(v => v !== null);
+    const tableReport = this.getFormData();
 
-    const tableReport: TableReportModel = {
-      name: this.addTableReportForm.value['name'],
-      period: this.addTableReportForm.value['period'].hours,
-      deviceIDs: selectedDevicesIds
-    };
+    this.modal.close();
     this.addTableReportForm.reset();
 
     this.tableReportService.createTableReport(tableReport).subscribe(
@@ -95,7 +87,49 @@ export class NewReportComponent implements OnInit {
     );
   }
 
+  getFormData(): TableReportModel {
+    const selectedDevicesIds = this.addTableReportForm.value.selectedDevices
+    .map((v, i) => v ? this.deviceList[i].id : null)
+    .filter(v => v !== null);
+
+    const tableReport: TableReportModel = {
+      name: this.addTableReportForm.value['name'],
+      period: this.addTableReportForm.value['period'].hours,
+      deviceIDs: selectedDevicesIds
+    };
+
+    return tableReport;
+  }
+
   inMilliseconds(m, h= 0) {
     return ( h * 60 + m ) * 60 * 1000;
   }
+
+  minSelectedCheckboxes(min = 1) {
+    const validator: ValidatorFn = (formArray: FormArray) => {
+      const totalSelected = formArray.controls
+        // get a list of checkbox values (boolean)
+        .map(control => control.value)
+        // total up the number of checked checkboxes
+        .reduce((prev, next) => next ? prev + next : prev, 0);
+
+      // if the total is not greater than the minimum, return the error message
+      return totalSelected >= min ? null : { required: true };
+    };
+
+    return validator;
+  }
+
+  filterList(value) {
+    value = value.toLowerCase();
+    // .filter() is not working
+    const names = document.getElementsByClassName('device-name');
+    for (let i = 0; i < names.length; i++) {
+      const name = names[i];
+      $(name).toggle(
+          $(name).text().toLowerCase().indexOf(value) > -1
+        );
+
+    }
+   }
 }

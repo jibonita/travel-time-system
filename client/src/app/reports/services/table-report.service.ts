@@ -10,4 +10,8 @@ export class TableReportService {
   public createTableReport(tableReport: TableReportModel): Observable<TableReportModel[]> {
     return this.requester.post('http://localhost:3000/table-reports', JSON.stringify(tableReport));
   }
+
+  public getTableReports(): Observable<TableReportModel[]> {
+    return this.requester.get('http://localhost:3000/table-reports');
+  }
 }

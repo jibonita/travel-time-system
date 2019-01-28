@@ -1,4 +1,5 @@
-<p>
-  list-reports works!
+Reports names below:
+<p *ngFor="let report of reportsList">
+  {{ report.name }}
+  <app-table-report></app-table-report>
 </p>
-<app-table-report></app-table-report>

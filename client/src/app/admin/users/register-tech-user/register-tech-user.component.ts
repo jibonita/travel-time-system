@@ -1,7 +1,8 @@
 import { AuthService } from './../../../core/auth.service';
 import { NotificatorService } from './../../../core/notificator.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { МodalComponent } from 'src/app/shared/modal/modal.component';
 
 @Component({
   selector: 'app-register-tech-user',
@@ -12,6 +13,8 @@ export class RegisterTechUserComponent implements OnInit {
 
   regForm: FormGroup;
 
+  @ViewChild(МodalComponent) public modal: МodalComponent;
+  
   constructor(
     private readonly authService: AuthService,
     private readonly notificator: NotificatorService,
@@ -29,12 +32,18 @@ export class RegisterTechUserComponent implements OnInit {
     this.authService.registerTechUser(this.regForm.value).subscribe(
       () => {
         this.notificator.success('Registered successfully!');
+        this.modal.close();
+        this.regForm.reset();
       },
       error => {
         console.log(error);
         this.notificator.error(error.error.message, 'Registration failed!');
       }
     );
+  }
+
+  public showUserForm(): void {
+    this.modal.open();
   }
 
 }
