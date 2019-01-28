@@ -11,5 +11,6 @@ export class CreateTableReportDTO {
   @IsNumber()
   offset?: OffsetDTO;
 
-  deviceNames: string[];
+  //deviceNames: string[];
+  deviceIDs: string[];
 }
