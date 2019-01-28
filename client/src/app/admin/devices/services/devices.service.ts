@@ -22,8 +22,10 @@ export class DevicesService {
     return this.requester.delete('http://localhost:3000/devices/' + id);
   }
   public assignDevice(user, devices): Observable<any> {
-    console.log(user + '---------------------');
-    console.log(devices + '---------------------');
-    return this.requester.post('http://localhost:3000/devices/assign', JSON.stringify(user), devices);
+    const assignDeviceDTO = {
+      user: user,
+      devices: devices
+    };
+    return this.requester.post('http://localhost:3000/devices/assign', JSON.stringify(assignDeviceDTO));
   }
 }
