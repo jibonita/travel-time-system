@@ -39,7 +39,11 @@ export class TableReportsController {
     } catch (error) {
        console.log(error.message)
     }
-    
+  }
+  @Get(':id')
+  @UseGuards(AuthGuard())
+  async getTableById(@Param('id') id): Promise<string> {
+    return await this.tableReportsService.getTableReportById(id);
   }
 
   @Put(':id')
