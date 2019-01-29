@@ -10,13 +10,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of usersList; let i = index">
+        <tr *ngFor="let user of usersList; let i = index" id="user.email">
             <th scope="row">{{i+1}}</th>
-            <th scope="row" id="useremailid">{{user.email}}</th>
+            <th scope="row" >{{user.email}}</th>
             <th scope="row">
                 <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
             </th>
-            <app-assign-device [email] = "user.email" [user]="user"></app-assign-device>
+            <app-assign-device [user]="user.email"></app-assign-device>
             <th>
             </th>
         </tr>

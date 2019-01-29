@@ -1,34 +1,32 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDeviceModal">
-  Add Devices
-</button>
+<ng-template #content let-modal>
+    <div class="modal-header">
 
-<!-- Modal -->
-<div class="modal fade" id="addDeviceModal" tabindex="-1" role="dialog" aria-labelledby="addDeviceModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addDeviceModalLabel">Choose devices to add</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <h5 class="modal-title" id="modal-basic-title">Choose devices to add</h5>
+        <button type="button" class="close"  (click)="modal.dismiss('Cross click')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+    </div>
+    <div class="modal-body"  *ngFor="let device of deviceList; let i = index">
 
-      <div class="modal-body" *ngFor="let device of deviceList; let i = index"
-      >
-        <div class="custom-control custom-checkbox" >
+
+      <div class="custom-control custom-checkbox" >
           <input [(ngModel)]="device.isActive" type="checkbox" class="custom-control-input" [id]="device.name">
           <label class="custom-control-label" [for]="device.name"
           
           >{{device.name}}</label>
         </div>
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="addMultipleDevices(deviceList)">Save changes</button>
-      </div>
     </div>
-  </div>
-</div>
+    <div class="modal-footer">
+      
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="addMultipleDevices(deviceList)">Save changes</button>
+    </div>
+  </ng-template>
+  
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+  
+  <hr>
+  
+  <pre>{{closeResult}}</pre>
+
+<!-- Modal -->

@@ -40,7 +40,8 @@ import { ReportsModule } from './reports/reports.module';
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     AuthModule,
-    ReportsModule
+    ReportsModule,
+    NgbModule,
   ],
   providers: [
     {
@@ -61,4 +62,4 @@ import { ReportsModule } from './reports/reports.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
