@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterTechUserComponent } from './register-tech-user/register-tech-user.component';
 import { AssignDeviceComponent } from './assign-device/assign-device.component';
 import { DevicesService } from '../devices/services/devices.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { DevicesService } from '../devices/services/devices.service';
     RegisterTechUserComponent,
     AssignDeviceComponent,
   ],
-  imports: [SharedModule, UserRoutingModule, FormsModule, ReactiveFormsModule, DevicesModule],
+  imports: [SharedModule, UserRoutingModule, FormsModule, ReactiveFormsModule, DevicesModule, NgbModule],
   providers: [UserDataService]
 })
 export class UserModule { }
