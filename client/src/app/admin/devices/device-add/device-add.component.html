@@ -34,8 +34,7 @@
               <div [hidden]="!(this.addDeviceForm.get('name').hasError('required') && this.addDeviceForm.dirty)">Required</div>
             </div>
             <div class="form-group">
-              <label  for="longitude">Longitude</label>
-              <!-- <label  for="longitude">{{'longitude' | sentenceCase:true}}</label> -->
+              <label  for="longitude">{{'longitude' | sentenceCase:true}}</label>
               <input 
                 class="form-control" 
                 id="longitude" 
@@ -45,7 +44,7 @@
             />
             </div>
             <div class="form-group">
-              <label  for="latitude">Latitude</label>
+              <label  for="latitude">{{'latitude' | sentenceCase:true}}</label>
               <input 
                 class="form-control" 
                 id="latitude" 
