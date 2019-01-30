@@ -29,8 +29,12 @@ export class DevicesListComponent implements OnInit {
     );
   }
 
-  updateList(event) {
-    this.devicesList.push(event);
+  updateList(device, index) {
+    if (index !== undefined) {
+      this.devicesList[index] = device;
+    } else {
+      this.devicesList.push(device);
+    }
   }
 
   deleteDevice(device): void {
@@ -48,7 +52,7 @@ export class DevicesListComponent implements OnInit {
   }
 
   editDevice(device){
-    console.log('Edit');
+    console.log('Edit in device-list');
   }
 
   setDisplay(state){

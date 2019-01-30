@@ -28,4 +28,8 @@ export class DevicesService {
     };
     return this.requester.post('http://localhost:3000/devices/assign', JSON.stringify(assignDeviceDTO));
   }
+
+  public editDevice(id, device: DeviceModel) {
+    return this.requester.put(`http://localhost:3000/devices/${id}`, JSON.stringify(device));
+  }
 }

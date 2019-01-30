@@ -20,7 +20,7 @@
       <td>{{device.latitude}}</td>
       <td>  
         <button type="button" class="btn btn-danger" (click)="deleteDevice(device)">Delete</button>
-        <app-device-add (newDevice)="this.updateList($event)" 
+        <app-device-add (updateDevice)="this.updateList($event, i)" 
                 [isAddDevice]="setDisplay(device)" 
                 [devid]="'dev'+(i+1)"></app-device-add>
       </td>

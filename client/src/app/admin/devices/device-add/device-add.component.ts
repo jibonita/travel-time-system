@@ -22,7 +22,6 @@ import { МodalComponent } from 'src/app/shared/modal/modal.component';
   styleUrls: ['./device-add.component.css']
 })
 export class DeviceAddComponent implements OnInit, AfterViewInit {
-
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly devicesService: DevicesService,
@@ -35,22 +34,36 @@ export class DeviceAddComponent implements OnInit, AfterViewInit {
   title: string;
   @Input() isAddDevice: boolean;
   @Input() devid: string;
-  
-  @Output() public newDevice = new EventEmitter<FormGroup>();
 
   @ViewChild(МodalComponent) public modal: МodalComponent;
+
+  @Output() public newDevice = new EventEmitter<FormGroup>();
+  @Output() public updateDevice = new EventEmitter();
+
   public emitNewDeviceAddedEvent(value): void {
     this.newDevice.emit(value);
   }
 
+  public emitUpdateDeviceListEvent(value): void {
+    this.updateDevice.emit(value);
+  }
+
   ngOnInit() {
-    console.log(this.isAddDevice)
+    // console.log(this.isAddDevice? this.isAddDevice.name : 'nqma')
+    this.title = this.isAddDevice ? 'Edit Device' : 'New Device';
 
     const name = this.formBuilder.control(
-      this.isAddDevice ? this.addDevice.name : ''
-      , [Validators.required]);
-    const longitude = this.formBuilder.control('', [Validators.required]);
-    const latitude = this.formBuilder.control('', [Validators.required]);
+      this.isAddDevice ? this.isAddDevice['name'] : '',
+      [Validators.required]
+    );
+    const longitude = this.formBuilder.control(
+      this.isAddDevice ? this.isAddDevice['longitude'] : '',
+      [Validators.required]
+    );
+    const latitude = this.formBuilder.control(
+      this.isAddDevice ? this.isAddDevice['latitude'] : '',
+      [Validators.required]
+    );
     this.addDeviceForm = this.formBuilder.group({
       name,
       longitude,
@@ -62,18 +75,13 @@ export class DeviceAddComponent implements OnInit, AfterViewInit {
     // console.log('AfterView Init');
     // console.log('comp after view', document.getElementById('mapid'+this.devid))
     //  const defaultLatLon = [42.698289, 23.324640];
-
     // console.log(`dev-add,afterView: ima li map?${'mapid'+this.devid} `+ document.getElementById('mapid'+this.devid));
     //   if (this.mapService.getMap) {
     //     const mapId = 'mapid'+this.devid;
     //     this.mapService.initMap(mapId, defaultLatLon, 13);
     //   }
-
-    //console.log(this.title)
-     this.title = this.isAddDevice ? 'Edit Device' : 'New Device' ;
-
- 
-
+    // console.log(this.title)
+    //  this.title = this.isAddDevice ? 'Edit Device' : 'New Device' ;
   }
 
   loadDeviceModal() {
@@ -81,31 +89,44 @@ export class DeviceAddComponent implements OnInit, AfterViewInit {
 
     this.mapService.destroy();
 
-    const defaultLatLon = [42.698289, 23.324640];
+    const defaultLatLon = [42.698289, 23.32464];
     if (!this.mapService.getMap) {
       const mapId = `mapid${this.devid}`;
       this.mapService.initMap(mapId, defaultLatLon, 13);
     }
 
-     this.mapService.getMap.on('click', (e) => {
-        this.getLonLat(e);
-      });
-
-
+    this.mapService.getMap.on('click', e => {
+      this.getLonLat(e);
+    });
   }
   addDevice() {
     this.devicesService.addDevice(this.addDeviceForm.value).subscribe(
-       () => {
-         this.notificator.success('Device added successfully!');
-         this.emitNewDeviceAddedEvent(this.addDeviceForm.value);
-         this.modal.close();
-       },
-       error => {
-         this.notificator.error(error.message, 'Device add failed!');
-       }
-     );
-   }
+      (data) => {
+        this.notificator.success('Device added successfully!');
+        this.emitNewDeviceAddedEvent(data);
+        this.modal.close();
+      },
+      error => {
+        this.notificator.error(error.message, 'Device add failed!');
+      }
+    );
+  }
 
+  editDevice() {
+    this.modal.close();
+
+    this.devicesService
+      .editDevice(this.isAddDevice['id'], this.addDeviceForm.value)
+      .subscribe(
+        (data) => {
+          this.notificator.success('Device updated successfully!');
+          this.emitUpdateDeviceListEvent(data);
+        },
+        error => {
+          this.notificator.error(error.message, 'Device Udpdate failed!');
+        }
+      );
+  }
   getLonLat(event) {
     const [lat, lon] = this.mapService.getMapLatLon(event);
 
