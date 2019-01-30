@@ -40,8 +40,7 @@ import { ReportsModule } from './reports/reports.module';
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     AuthModule,
-    ReportsModule,
-    NgbModule,
+    ReportsModule
   ],
   providers: [
     {

@@ -7,12 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewReportComponent } from './new-report/new-report.component';
 import { TableReportComponent } from './table-report/table-report.component';
 import { TableReportService } from './services/table-report.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [ListReportsComponent, NewReportComponent, TableReportComponent],
   imports: [
     CommonModule,
-    SharedModule, ReactiveFormsModule
+    SharedModule, ReactiveFormsModule, NgbModule
   ],
   providers: [DevicesService, TableReportService],
   exports: [NewReportComponent, ListReportsComponent]

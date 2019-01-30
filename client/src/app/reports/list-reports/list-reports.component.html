@@ -1,5 +1,17 @@
 Reports names below:
-<p *ngFor="let report of reportsList">
-  {{ report.name }}
-  <app-table-report></app-table-report>
-</p>
+<div *ngFor="let report of reportsList">
+  
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <span> <b>{{ report.name }}</b> </span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        
+        <app-table-report></app-table-report>
+
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+  
+</div>
