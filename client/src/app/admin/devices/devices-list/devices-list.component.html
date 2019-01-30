@@ -1,6 +1,8 @@
-<app-device-add (newDevice)="this.updateList($event)" [isAddDevice]="setDisplay(false)" ></app-device-add>
+<app-device-add (newDevice)="this.updateList($event)" 
+  [isAddDevice]="setDisplay(false)" 
+  [devid]="'dev0'"></app-device-add>
 
-<table class="table">
+<table class="table" *ngIf="devicesList?.length > 0">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -18,7 +20,9 @@
       <td>{{device.latitude}}</td>
       <td>  
         <button type="button" class="btn btn-danger" (click)="deleteDevice(device)">Delete</button>
-        <app-device-add (newDevice)="this.updateList($event)" [isAddDevice]="setDisplay(device)"></app-device-add>
+        <app-device-add (newDevice)="this.updateList($event)" 
+                [isAddDevice]="setDisplay(device)" 
+                [devid]="'dev'+(i+1)"></app-device-add>
       </td>
     </tr>
   </tbody>

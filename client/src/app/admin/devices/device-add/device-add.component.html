@@ -1,84 +1,60 @@
-<button *ngIf="!isAddDevice"
-  class="btn btn-lg btn-outline-primary" 
-  data-toggle="modal" 
-  data-target="#formModal" 
-  data-whatever="@getbootstrap" >Add Device </button>
-<button *ngIf="!!isAddDevice" 
-  class="btn btn-warning" 
-  data-toggle="modal" 
-  data-target="#formModal" >Edit</button>
-<!-- (click)="editDevice(device)" (click)="open(formModal)" -->
-
-<!-- <ng-template #content let-modal> -->
-<div class="modal fade" id="formModal" tabindex="-1" role="dialog" 
-     aria-labelledby="theModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">{{ title }}</h4>
-          <button type="button" class="close" aria-label="Close" data-dismiss="modal" >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-         
-          <form [formGroup]="addDeviceForm" >  <!-- (ngSubmit)="addDevice()" -->
-            <div class="form-group">
-              <label  for="name">Name</label>
-              <input  required 
-                class="form-control" 
-                id="name" 
-                type="text" 
-                placeholder="device name..." 
-                formControlName="name" />
-              <div [hidden]="!(this.addDeviceForm.get('name').hasError('required') && this.addDeviceForm.dirty)">Required</div>
+    <button *ngIf="!isAddDevice" (click)="loadDeviceModal()"
+        class="btn btn-lg btn-outline-primary" >Add Device </button>
+    <button *ngIf="!!isAddDevice"  (click)="loadDeviceModal()"
+        class="btn btn-warning" >Edit</button>
+<div class="card"  [class.highlight]="this.isHighlighted">
+    <div class="card-body">
+        <app-modal>
+            <div class="title">{{ title }}</div>
+            <div class="body">
+              
+              <form [formGroup]="addDeviceForm" >  <!-- (ngSubmit)="addDevice()" -->
+                <div class="form-group">
+                  <label  for="name">Name</label>
+                  <input  required 
+                    class="form-control" 
+                    id="name" 
+                    type="text" 
+                    placeholder="device name..." 
+                    formControlName="name" />
+                  <div [hidden]="!(this.addDeviceForm.get('name').hasError('required') && this.addDeviceForm.dirty)">Required</div>
+                </div>
+                <div class="form-group">
+                  <label  for="longitude">{{'longitude' | sentenceCase:true}}</label>
+                  <input 
+                    class="form-control" 
+                    id="longitude" 
+                    type="text" 
+                    placeholder="longitude..."
+                    formControlName="longitude" 
+                />
+                </div>
+                <div class="form-group">
+                  <label  for="latitude">{{'latitude' | sentenceCase:true}}</label>
+                  <input 
+                    class="form-control" 
+                    id="latitude" 
+                    type="text" 
+                    placeholder="latitude..."
+                    formControlName="latitude" 
+                />
+                </div>                 
+              </form>
+               <div class="map-container">
+                 <app-street-map [mapid]="devid"></app-street-map>
+               </div>
+    
             </div>
-            <div class="form-group">
-              <label  for="longitude">{{'longitude' | sentenceCase:true}}</label>
-              <input 
-                class="form-control" 
-                id="longitude" 
-                type="text" 
-                placeholder="longitude..."
-                formControlName="longitude" 
-            />
+            <div class="footer">              
+                <button *ngIf="!isAddDevice"
+                  [disabled]="this.addDeviceForm.invalid" type="submit" class="btn btn-primary"  
+                  (click)="addDevice()"
+                    >Save</button>
+                <button *ngIf="!!isAddDevice"
+                    [disabled]="this.addDeviceForm.invalid" type="submit" class="btn btn-primary"  
+                    (click)="editDevice()"
+                    >Update</button>
             </div>
-            <div class="form-group">
-              <label  for="latitude">{{'latitude' | sentenceCase:true}}</label>
-              <input 
-                class="form-control" 
-                id="latitude" 
-                type="text" 
-                placeholder="latitude..."
-                formControlName="latitude" 
-            />
-            </div>
-            <app-street-map ></app-street-map>
-
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button 
-              [disabled]="this.addDeviceForm.invalid" type="submit" class="btn btn-primary"  
-              (click)="addDevice()"
-               >Save</button>
-            <button 
-               [disabled]="this.addDeviceForm.invalid" type="submit" class="btn btn-primary"  
-               (click)="editDevice()"
-                >Update</button>
-               <!-- (click)="modal.close('Save click')"  -->
-
-            
-            
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
-        </div>
+        </app-modal>
       </div>
     </div>
-</div>
-<!-- </ng-template> -->
-
-
-
-
