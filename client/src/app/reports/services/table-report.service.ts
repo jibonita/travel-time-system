@@ -15,7 +15,7 @@ export class TableReportService {
     return this.requester.get('http://localhost:3000/table-reports');
   }
 
-  public getTableReport(id): Observable<any> {
+  public getTableReportById(id): Observable<any> {
     return this.requester.get('http://localhost:3000/table-reports' + id);
   }
 }
