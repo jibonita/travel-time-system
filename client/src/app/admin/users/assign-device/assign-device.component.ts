@@ -14,7 +14,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AssignDeviceComponent implements OnInit {
   deviceList: any[] = [];
   addMultipleDevicesForm: FormGroup;
-  @Input() modalId: string;
   @Input() user: any;
 
   closeResult: string;
