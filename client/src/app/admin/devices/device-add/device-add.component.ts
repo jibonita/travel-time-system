@@ -21,7 +21,7 @@ import { МodalComponent } from 'src/app/shared/modal/modal.component';
   // templateUrl: './temp.html',
   styleUrls: ['./device-add.component.css']
 })
-export class DeviceAddComponent implements OnInit, AfterViewInit {
+export class DeviceAddComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly devicesService: DevicesService,
@@ -49,7 +49,6 @@ export class DeviceAddComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // console.log(this.isAddDevice? this.isAddDevice.name : 'nqma')
     this.title = this.isAddDevice ? 'Edit Device' : 'New Device';
 
     const name = this.formBuilder.control(
@@ -71,34 +70,36 @@ export class DeviceAddComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    // console.log('AfterView Init');
-    // console.log('comp after view', document.getElementById('mapid'+this.devid))
-    //  const defaultLatLon = [42.698289, 23.324640];
-    // console.log(`dev-add,afterView: ima li map?${'mapid'+this.devid} `+ document.getElementById('mapid'+this.devid));
-    //   if (this.mapService.getMap) {
-    //     const mapId = 'mapid'+this.devid;
-    //     this.mapService.initMap(mapId, defaultLatLon, 13);
-    //   }
-    // console.log(this.title)
-    //  this.title = this.isAddDevice ? 'Edit Device' : 'New Device' ;
-  }
-
   loadDeviceModal() {
     this.modal.open();
 
     this.mapService.destroy();
 
-    const defaultLatLon = [42.698289, 23.32464];
+    let latLon = [];
+    if (this.isAddDevice) {
+      latLon = [
+        this.isAddDevice['latitude'],
+        this.isAddDevice['longitude']
+      ];
+    }
+
     if (!this.mapService.getMap) {
       const mapId = `mapid${this.devid}`;
-      this.mapService.initMap(mapId, defaultLatLon, 13);
+      this.mapService.initMap(mapId, latLon, 13);
     }
 
     this.mapService.getMap.on('click', e => {
       this.getLonLat(e);
     });
+
+    if (this.isAddDevice) {
+      this.mapService.addMarker([
+          this.isAddDevice['latitude'],
+          this.isAddDevice['longitude']
+        ]);
+    }
   }
+
   addDevice() {
     this.devicesService.addDevice(this.addDeviceForm.value).subscribe(
       (data) => {

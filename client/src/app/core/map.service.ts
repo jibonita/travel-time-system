@@ -4,6 +4,8 @@ import * as L from "leaflet";
 
 @Injectable()
 export class MapService {
+  private defaultLatLon = [42.698289, 23.324640]; // Sofia by default
+ 
   private streetMap;
   private marker: any;
 
@@ -12,6 +14,9 @@ export class MapService {
   }
   public initMap(mapId, latLang, zoom): any {
     if (document.getElementById(mapId)) {
+      if (latLang.length === 0) {
+        latLang = this.defaultLatLon;
+      }
       const myMap = L.map(mapId).setView(latLang, zoom);
       // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       //   attribution:
