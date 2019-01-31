@@ -28,4 +28,9 @@ export class TableReportService {
     const url = `http://ec2-35-158-53-19.eu-central-1.compute.amazonaws.com:8080/api/travelTimeTableData?devices=${devices}&date=${period}`;
     return this.requester.get(url);
   }
+
+  public deleteTableReport(id): Observable<any> {
+    return this.requester.delete(`http://localhost:3000/table-reports/${id}`);
+  }
+  
 }

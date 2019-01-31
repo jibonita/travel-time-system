@@ -7,8 +7,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of tableReport | keyvalue; let i = index">
-        <td>{{item.key}}</td>
-        <td *ngFor="let item of item.value | keyvalue; let i = index">{{item.value}}</td>
+        <td >{{item.key}}</td>
+        <td *ngFor="let item2 of item.value | keyvalue; let i = index"(click)="loadChart(item2, item.key)">{{item2.value}}</td>
       </tr>
     </tbody>
-  </table>
+  </table> 

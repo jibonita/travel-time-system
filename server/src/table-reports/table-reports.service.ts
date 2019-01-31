@@ -104,8 +104,9 @@ export class TableReportsService {
         if (!tableToDelete) {
             throw new BadRequestException('Action not permitted! This user has no such table.');
         }
+        console.log(tableId)
         await this.tableReportsRepository.delete(tableId);
-
+console.log(tableId)
         return `Table report with id "${tableId}" was successfully deleted.`;
     }
 }

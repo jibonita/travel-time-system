@@ -5,7 +5,12 @@ Reports names below:
     <ngb-panel>
       <ng-template ngbPanelTitle>
         <span> <b>{{ report.name }}</b> </span>
+        <button class="btn-sm"(click)="viewRoute(report.id);" 
+                >View Route</button>
+        <button class="btn-sm"(click)="deleteReport(report.id)"
+                >delete</button>
       </ng-template>
+      
       <ng-template ngbPanelContent>
         
         <app-table-report [report]="report"></app-table-report>

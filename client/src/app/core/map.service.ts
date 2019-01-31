@@ -18,11 +18,7 @@ export class MapService {
         latLang = this.defaultLatLon;
       }
       const myMap = L.map(mapId).setView(latLang, zoom);
-      // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      //   attribution:
-      //     '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      // }).addTo(streetMap);
-
+      
       const mapBoxToken =
         'pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1sZGphMDJsMjQ2bXJwcXMxNjZkeiJ9.Bq8DniBup0gVphk00oFt5Q';
       const mapBoxTokenDefault =
@@ -32,9 +28,7 @@ export class MapService {
       L.tileLayer(
         `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${mapBoxToken}`,
         {
-          attribution: `Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>
-                          contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,
-                          Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
+          attribution: ``,
           maxZoom: 18,
           id: 'mapbox.streets',
           accessToken: mapBoxToken

@@ -55,6 +55,10 @@ export class TableReportsController {
   @Delete(':id')
   @UseGuards(AuthGuard())
   async deleteTableById(@Request() req, @Param('id') tableReportId): Promise<string> {
+    console.log(req.user);
+    console.log(tableReportId);
+    
+    
     return await this.tableReportsService.deleteTableById(req.user, tableReportId);
   }
 
