@@ -60,7 +60,7 @@ export class DevicesService {
             await this.devicesRepository.save([device]);
         }));
 
-        return userFound;
+        return devices;
     }
 
     async findAll(req): Promise<Device[]> {
@@ -85,6 +85,27 @@ export class DevicesService {
         }
 
         return foundDevice;
+    }
+
+    async findAssigned(idUser): Promise<Device[]>{
+        
+        const userFound = await this.usersRepository.findOne(
+            { relations: [ 'adminUser'],
+                where: { email: idUser },
+        });
+    
+         const user = await this.usersRepository.findOne(
+                { relations: ['devices'],
+                where: { email: idUser },
+        });
+        
+        const devices = user.devices;
+        const userDevices = devices.filter(device => {
+            const foundUser = device.users.find(devUser => user.email === devUser.email)
+            return !!foundUser;
+        });
+        
+        return userDevices;
     }
 
     async update(idDevice: string, updateDeviceDTO: UpdateDeviceDTO): Promise<Device> {
@@ -130,6 +151,7 @@ export class DevicesService {
 
         return deviceFoundById;
     }
+
     // Helper Method
     private async foundDevice(query: object) {
 
