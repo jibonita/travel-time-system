@@ -104,7 +104,9 @@ export class DeviceAddComponent implements OnInit {
     this.devicesService.addDevice(this.addDeviceForm.value).subscribe(
       (data) => {
         this.notificator.success('Device added successfully!');
+        
         this.emitNewDeviceAddedEvent(data);
+        this.addDeviceForm.reset();
         this.modal.close();
       },
       error => {
