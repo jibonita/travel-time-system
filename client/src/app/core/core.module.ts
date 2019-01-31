@@ -1,3 +1,4 @@
+import { ChartService } from './chart.service';
 import { MapService } from './map.service';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { RequesterService } from './requester.service';
@@ -19,7 +20,8 @@ import { AdmnOnlyActivatorService } from './route-guards/admin-only-route-activa
     AuthRouteActivatorService,
     AnonymousRouteActivatorService,
     AdmnOnlyActivatorService,
-    MapService
+    MapService,
+    ChartService
   ]
 })
 export class CoreModule {

@@ -40,7 +40,9 @@ export class TableReportComponent implements OnInit, OnDestroy {
     console.log('report destroy')
   }
 
-  loadChart(item, b) {
-    console.log('load chart', item, b)
+  loadChart(origin, destination) {
+    console.log('load chart', origin, '=>', destination)
+    // 1. check for charts per this  table
+    //2. get data per each chart
   }
 }
