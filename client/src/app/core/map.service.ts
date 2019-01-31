@@ -1,11 +1,11 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable, OnInit } from '@angular/core';
 // declare let L;
-import * as L from "leaflet";
+import * as L from 'leaflet';
 
 @Injectable()
 export class MapService {
   private defaultLatLon = [42.698289, 23.324640]; // Sofia by default
- 
+
   private streetMap;
   private marker: any;
 
@@ -24,11 +24,11 @@ export class MapService {
       // }).addTo(streetMap);
 
       const mapBoxToken =
-        "pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1sZGphMDJsMjQ2bXJwcXMxNjZkeiJ9.Bq8DniBup0gVphk00oFt5Q";
+        'pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1sZGphMDJsMjQ2bXJwcXMxNjZkeiJ9.Bq8DniBup0gVphk00oFt5Q';
       const mapBoxTokenDefault =
-        "pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1ndnJkMGdobjN5cDg5aW40eWZuZCJ9.FM_p6c5qLi6gD8Tem-88MA";
+        'pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1ndnJkMGdobjN5cDg5aW40eWZuZCJ9.FM_p6c5qLi6gD8Tem-88MA';
       const secondToken =
-        "pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1ydnUxMHJ2YjQ0bDh1cjllazQ4ayJ9.Yy7row2YHGvKUxrOgv-fgA";
+        'pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1ydnUxMHJ2YjQ0bDh1cjllazQ4ayJ9.Yy7row2YHGvKUxrOgv-fgA';
       L.tileLayer(
         `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${mapBoxToken}`,
         {
@@ -36,7 +36,7 @@ export class MapService {
                           contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,
                           Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
           maxZoom: 18,
-          id: "mapbox.streets",
+          id: 'mapbox.streets',
           accessToken: mapBoxToken
         }
       ).addTo(myMap);
@@ -63,8 +63,8 @@ export class MapService {
     }
 
     const circle = L.circle(latlon, {
-      color: "red",
-      fillColor: "#f03",
+      color: 'red',
+      fillColor: '#f03',
       fillOpacity: 0.5,
       radius: 5
     }).addTo(this.streetMap);
