@@ -14,7 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AssignDeviceComponent implements OnInit {
   deviceList: any[] = [];
   addMultipleDevicesForm: FormGroup;
-  @Input() user: any;
+  @Input() user: string;
 
   closeResult: string;
 
@@ -31,10 +31,16 @@ export class AssignDeviceComponent implements OnInit {
       (result) => {
         this.deviceList = result;
     });
+    // get already assigned devices fro this user
+    //console.log(this.user);
+    
+    this.devicesService.getAllUserAssignedDevices(this.user).subscribe(
+      (result) => {
+        console.log(result);
+    });
+
 
     const name = this.formBuilder.control('', [Validators.required]);
-    // const longitude = this.formBuilder.control('40.971409', [Validators.required]);
-    // const latitude = this.formBuilder.control(' -5.669503', [Validators.required]);
     this.addMultipleDevicesForm = this.formBuilder.group({
     });
   }
@@ -59,8 +65,8 @@ export class AssignDeviceComponent implements OnInit {
     });
     this.devicesService.assignDevice(this.user, devicesID).subscribe(
       () => {
-        this.notificator.success('Device added successfully!');
-        // close modal
+        this.notificator.success('Devices assigned successfully!');
+        this.modalService.dismissAll();
       },
       error => {
         console.log(error);
