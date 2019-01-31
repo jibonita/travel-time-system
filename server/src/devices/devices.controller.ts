@@ -67,6 +67,16 @@ export class DevicesController {
         } catch (error) {
             throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Get('assigned/:id')
+    @UseGuards(AuthGuard('jwt'), AdminGuard)
+    async findAssigned(@Param('id') id: string): Promise<Device[]> {
+        try {
+            return await this.devicesService.findAssigned(id);
+        } catch (error) {
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+        }
 
     }
 
