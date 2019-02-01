@@ -8,9 +8,10 @@ import { NewReportComponent } from './new-report/new-report.component';
 import { TableReportComponent } from './table-report/table-report.component';
 import { TableReportService } from './services/table-report.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReportOptionsComponent } from './report-options/report-options.component';
 
 @NgModule({
-  declarations: [ListReportsComponent, NewReportComponent, TableReportComponent],
+  declarations: [ListReportsComponent, NewReportComponent, TableReportComponent, ReportOptionsComponent],
   imports: [
     CommonModule,
     SharedModule, ReactiveFormsModule, NgbModule
