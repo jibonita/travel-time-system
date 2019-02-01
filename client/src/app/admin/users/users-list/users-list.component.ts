@@ -23,6 +23,11 @@ export class UsersListComponent implements OnInit {
     );
   }
 
+  updateUsersList(user) {
+    console.log(user);
+    
+    this.usersList.push(user);
+  }
   deleteUser(email): void {
     this.usersService.deleteUser(email).subscribe(
       () => {

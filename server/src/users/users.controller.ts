@@ -29,8 +29,8 @@ export class UsersController {
     user: UserRegisterDTO,
   ): Promise<string> {
     try {
-      await this.usersService.addUser(user, req.user);
-      return JSON.stringify('User added!');
+      const newUser = await this.usersService.addUser(user, req.user);
+      return JSON.stringify({email: newUser[0].email});
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.CONFLICT);
     }

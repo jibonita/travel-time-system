@@ -1,7 +1,7 @@
 import { AuthService } from './../../../core/auth.service';
 import { NotificatorService } from './../../../core/notificator.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { МodalComponent } from 'src/app/shared/modal/modal.component';
 
 @Component({
@@ -21,6 +21,12 @@ export class RegisterTechUserComponent implements OnInit {
     private formBuilder: FormBuilder
   ) { }
 
+  @Output() public newTechUser = new EventEmitter<FormGroup>();
+
+  public emitNewTechUserAddedEvent(value): void {
+    this.newTechUser.emit(value);
+  }
+
   ngOnInit(): void {
     this.regForm = this.formBuilder.group({
       email: this.formBuilder.control('', [Validators.required]),
@@ -30,7 +36,8 @@ export class RegisterTechUserComponent implements OnInit {
 
   public register(): void {
     this.authService.registerTechUser(this.regForm.value).subscribe(
-      () => {
+      (data) => {
+        this.emitNewTechUserAddedEvent(data);
         this.notificator.success('Registered successfully!');
         this.modal.close();
         this.regForm.reset();

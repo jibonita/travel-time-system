@@ -34,10 +34,9 @@ export class AssignDeviceComponent implements OnInit {
     // get already assigned devices fro this user
     //console.log(this.user);
     
-    this.devicesService.getAllUserAssignedDevices(this.user).subscribe(
-      (result) => {
-        console.log(result);
-    });
+    // this.devicesService.getAllUserAssignedDevices(this.user).subscribe(
+    //   (result) => {
+    // });
 
 
     const name = this.formBuilder.control('', [Validators.required]);
