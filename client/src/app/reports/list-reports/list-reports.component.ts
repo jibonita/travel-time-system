@@ -26,28 +26,8 @@ console.log('init');
       );
   }
 
-  deleteReport(reportId) {
-    console.log('in delete ');
-    
-    
-    this.tableReportService.deleteTableReport(reportId).subscribe(
-      (data) => {
-        this.notificator.success('Deleted table report');
-        
-        const index = this.reportsList.indexOf(reportId);
-        this.reportsList.splice(index, 1);
-        console.log(this.reportsList)
-      },
-      error => {
-        console.log(error);
-      
-        //this.notificator.error(error.message, 'Could not delete the report!');
-      }
-    );
-  }
-
-  viewRoute(reportId){
-    console.log('view report map'+ reportId)
+  viewRoute(reportId) {
+    console.log('view report map' + reportId);
   }
 
 

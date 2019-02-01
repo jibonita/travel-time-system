@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { TableReportService } from '../services/table-report.service';
+import { TableReportModel } from '../models/table-report.model';
 
 @Component({
   selector: 'app-report-options',
@@ -6,10 +9,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./report-options.component.css']
 })
 export class ReportOptionsComponent implements OnInit {
+  reportsList: TableReportModel[];
+  @Input() report: string;
 
-  constructor() { }
+  constructor(
+    private readonly notificator: ToastrService,
+    private readonly tableReportService: TableReportService
+  ) { }
 
   ngOnInit() {
+    this.tableReportService.getTableReports().subscribe(
+      (data) => {
+        this.reportsList = data;
+      }
+    );
   }
 
+  deleteReport(reportId) {
+    this.tableReportService.deleteTableReport(reportId).subscribe(
+      (data) => {
+        this.notificator.success('Deleted table report');
+        const index = this.reportsList.indexOf(reportId);
+        this.reportsList.splice(index, 1);
+        console.log(this.reportsList);
+      },
+      error => {
+        console.log(error);
+        //this.notificator.error(error.message, 'Could not delete the report!');
+      }
+    );
+  }
 }

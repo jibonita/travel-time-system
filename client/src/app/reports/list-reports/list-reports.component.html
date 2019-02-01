@@ -6,10 +6,12 @@ Reports names below:
       <ng-template ngbPanelTitle>
         <span> <b>{{ report.name }}</b> </span>
         <span style="float:right">
-          <button class="btn-sm"(click)="viewRoute(report.id); $event.stopPropagation()" 
+          <!-- <button class="btn-sm"(click)="viewRoute(report.id); $event.stopPropagation()" 
                 >View Route</button>
-          <button class="btn-sm"(click)="deleteReport(report.id)"
-                >delete</button>
+          <button class="btn-sm"(click)="deleteReport(report.id); $event.stopPropagation()"
+                >delete</button> -->
+
+                <app-report-options [report]="report"></app-report-options>
         </span>
         
       </ng-template>
