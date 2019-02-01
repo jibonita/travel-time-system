@@ -10,14 +10,19 @@ import { TableReportService } from './services/table-report.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartReportComponent } from './chart-report/chart-report.component';
 import { ListChartReportComponent } from './list-chart-report/list-chart-report.component';
+import { ReportOptionsComponent } from './report-options/report-options.component';
 
 @NgModule({
-  declarations: [ListReportsComponent, NewReportComponent, TableReportComponent, ChartReportComponent, ListChartReportComponent],
-  imports: [
-    CommonModule,
-    SharedModule, ReactiveFormsModule, NgbModule
+  declarations: [
+    ListReportsComponent,
+    NewReportComponent,
+    TableReportComponent,
+    ChartReportComponent,
+    ListChartReportComponent,
+    ReportOptionsComponent
   ],
+  imports: [CommonModule, SharedModule, ReactiveFormsModule, NgbModule],
   providers: [DevicesService, TableReportService],
   exports: [NewReportComponent, ListReportsComponent]
 })
-export class ReportsModule { }
+export class ReportsModule {}
