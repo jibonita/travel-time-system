@@ -11,7 +11,11 @@ import { TableReportService } from '../services/table-report.service';
 })
 export class AddChartTableComponent implements OnInit {
   addChartForm: FormGroup;
-  dateTime: Date;
+  public startDateTime: Date;
+  public newDates: Date;
+  public allDates: string[] = [];
+  public allDatesMs: any[] = [];
+  @Input() reportId: string;
   periods = [
     {name: '15 minutes', hours: 0.25, millisec: this.inMilliseconds(15)},
     {name: '30 minutes', hours: 0.5,  millisec: this.inMilliseconds(30)},
@@ -41,6 +45,19 @@ export class AddChartTableComponent implements OnInit {
     });
   }
 
+  addNewDate(newDates) {
+    this.allDates.push(newDates);
+  }
+
+  convertToMs(date) {
+    const ms = date.getTime();
+    this.allDatesMs.push(ms);
+  }
+
+  showDateOnModal(date) {
+    console.log(date);
+  }
+
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
@@ -53,17 +70,31 @@ export class AddChartTableComponent implements OnInit {
     return ( h * 60 + m ) * 60 * 1000;
   }
 
-  createChartReport() {
-    const chartReport: any = {
-      name: this.addChartForm.value['name'],
-      period: this.addChartForm.value['period'].hours
-    };
-    const date = new Date();
-    console.log(chartReport);
-    console.log(date.getTime);
-    
-    
+  AddChartReportToDB(id, tablereport) {
+    this.tableReportService.createChartReport(id, tablereport).subscribe(
+      (data) => {
+        this.notificator.success('Chart created successfully!');
+        // TODO: UPDATE TABLE REPORT LIST WITH THE NEW REPORT
+        console.log(data);
+      },
+      error => {
+        this.notificator.error(error.message, 'Chart creation failed!');
+      }
+    );
+
   }
 
-  
+  createChartReport() {
+    const startDateInMs = this.startDateTime.getTime();
+    this.allDatesMs.unshift(startDateInMs);
+    const chartReport: any = {
+      name: this.addChartForm.value['name'],
+      periodInMilliseconds: this.addChartForm.value['period'].millisec,
+      startDates: this.allDatesMs
+    };
+    console.log(chartReport);
+    
+    return this.AddChartReportToDB(this.reportId, chartReport);
+
+  }
 }

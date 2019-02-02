@@ -13,6 +13,7 @@ import { ListChartReportComponent } from './list-chart-report/list-chart-report.
 import { ReportOptionsComponent } from './report-options/report-options.component';
 import { AddChartTableComponent } from './add-chart-table/add-chart-table.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     ReportOptionsComponent,
     AddChartTableComponent
   ],
-  imports: [CommonModule, SharedModule, ReactiveFormsModule, NgbModule, OwlDateTimeModule, OwlNativeDateTimeModule,],
+  imports: [CommonModule, SharedModule, ReactiveFormsModule, NgbModule, OwlDateTimeModule, OwlNativeDateTimeModule, FormsModule],
   providers: [DevicesService, TableReportService],
   exports: [NewReportComponent, ListReportsComponent]
 })
