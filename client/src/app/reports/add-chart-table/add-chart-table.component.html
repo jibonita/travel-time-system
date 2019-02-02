@@ -1,0 +1,88 @@
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+
+    <h5 class="modal-title" id="modal-basic-title">Choose devices to add</h5>
+      <button type="button" class="close"  (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addChartForm">
+      <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <label class="input-group-text col-sm-2" for="name">Name</label>
+            <input  required 
+              class="form-control col-sm-8" 
+              id="name" 
+              type="text" 
+              placeholder="Chart name..." 
+              formControlName="name" />
+            <div class="col-sm-1" [hidden]="!(this.addChartForm.get('name').hasError('required') && this.addChartForm.dirty)"> * </div>
+          
+      </div>
+      <div class="form-group row">
+          <div class="col-sm-1"></div>
+          <label class="input-group-text col-sm-2" for="period">Period</label>
+          <select class="col-sm-8" id="period" formControlName="period" required>
+              <option *ngFor="let period of periods" [ngValue]="period">
+                  {{ period.name }}
+                </option>
+          </select>
+          <div class="col-sm-1" [hidden]="!(this.addChartForm.get('period').hasError('required') && this.addChartForm.dirty)"> * </div>
+      </div>
+      <div class="form-group row">
+          
+        <label class="input-group-text col-sm-3" for="DateTime">Start Date</label>
+          <input placeholder="Date Time:"
+                 [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+          <owl-date-time #dt></owl-date-time>
+          <h4>Value From Picker: {{dateTime}}</h4>
+      </div>
+      <!-- <div class="form-group">
+          <div class="row">
+            <div class="col-sm-1"></div>
+            <label class="input-group-text col-sm-2" for="deviceSearch">Devices</label>
+            <input 
+              class="form-control col-sm-8" 
+              id="deviceSearch" 
+              type="text" 
+              placeholder="Search device..." 
+              formControlName="deviceSearch"
+              (keyup)="filterList($event.target.value)"  />
+           </div> 
+           <div class="device-wrap col-sm-10">
+              <div class="row device-name"
+                  *ngFor="let device of addTableReportForm.controls.selectedDevices.controls; let i = index" >
+                <div class="col-sm-3"></div>
+                <div class="form-check col-sm-8 col-centered">
+                    <label formArrayName="selectedDevices">
+                        <input type="checkbox" [formControlName]="i">
+                        {{deviceList[i].name}}
+                    </label>
+                </div>
+              </div>
+           </div>
+          
+      </div> -->
+      
+      
+    </form>
+
+    
+  </div>
+  <div class="modal-footer">
+    
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Close</button>
+    <button type="button" class="btn btn-primary" (click)="createChartReport()">Add Report</button>
+  </div>
+</ng-template>
+
+<button class="dropdown-item" (click) = "open(content); $event.stopPropagation()">Add Chart</button>
+
+<hr>
+
+<pre>{{closeResult}}</pre>
+
+<!-- Modal -->

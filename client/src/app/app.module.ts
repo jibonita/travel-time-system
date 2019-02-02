@@ -19,6 +19,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ServerErrorComponent } from './components/server-error/server-errror.component';
 import { ReportsLandingComponent } from './components/reports-landing/reports-landing.component';
 import { ReportsModule } from './reports/reports.module';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,10 @@ import { ReportsModule } from './reports/reports.module';
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     AuthModule,
-    ReportsModule
+    ReportsModule,
+    OwlDateTimeModule,
+   OwlNativeDateTimeModule,
+    
   ],
   providers: [
     {
