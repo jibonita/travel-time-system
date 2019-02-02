@@ -20,6 +20,7 @@ import { ServerErrorComponent } from './components/server-error/server-errror.co
 import { ReportsLandingComponent } from './components/reports-landing/reports-landing.component';
 import { ReportsModule } from './reports/reports.module';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     ReportsModule,
     OwlDateTimeModule,
    OwlNativeDateTimeModule,
-    
+   FormsModule,
   ],
   providers: [
     {

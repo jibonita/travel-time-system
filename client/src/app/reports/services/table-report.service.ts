@@ -1,3 +1,4 @@
+import { ChartReportDTO } from './../models/chart-report.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequesterService } from './../../core/requester.service';
@@ -32,5 +33,10 @@ export class TableReportService {
   public deleteTableReport(id): Observable<any> {
     return this.requester.delete(`http://localhost:3000/table-reports/${id}`);
   }
-  
+
+  public createChartReport(id, chartReport: ChartReportDTO): Observable<any> {
+    console.log(chartReport);
+    
+    return this.requester.post(`http://localhost:3000/table-reports/${id}/chart-reports`, JSON.stringify(chartReport));
+  }
 }
