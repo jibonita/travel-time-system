@@ -1,11 +1,18 @@
-import { ChartReportDTO } from './../models/chart-report.model';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { RequesterService } from './../../core/requester.service';
+import { ChartReportDTO } from './../models/chart-report.model';
 import { TableReportModel } from '../models/table-report.model';
 
 @Injectable()
 export class TableReportService {
+  private chartDevicesSourse$ = new BehaviorSubject('');
+  currentChartDevices$ = this.chartDevicesSourse$.asObservable();
+
+  changeDevices(message: string) {
+    this.chartDevicesSourse$.next(message);
+  }
+
   public constructor(private readonly requester: RequesterService) {}
 
   public createTableReport(tableReport: TableReportModel): Observable<TableReportModel[]> {
@@ -38,5 +45,15 @@ export class TableReportService {
     console.log(chartReport);
     
     return this.requester.post(`http://localhost:3000/table-reports/${id}/chart-reports`, JSON.stringify(chartReport));
+  }
+
+  public getCompareChartData(compareData): Observable<any> {
+    const compareChart = {
+      'originID': compareData,
+      'destinationID': compareData,
+      'startDates': compareData,
+      'period': compareData
+    };
+    return this.requester.post('localhost:3000/table-reports/x/compare-chart', JSON.stringify(compareChart));
   }
 }
