@@ -22,7 +22,7 @@ console.log('init');
       this.tableReportService.getTableReports().subscribe(
         (data) => {
           this.reportsList = data;
-        }
+         }
       );
   }
 

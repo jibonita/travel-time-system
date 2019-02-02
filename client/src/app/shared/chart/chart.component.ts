@@ -1,4 +1,4 @@
-import { Component, NgZone, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, NgZone, AfterViewInit, OnDestroy, Input, OnInit } from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
@@ -10,82 +10,129 @@ am4core.useTheme(am4themes_animated);
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements AfterViewInit, OnDestroy {
+export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @Input() compareData;
+  
   private chart: am4charts.XYChart;
 
+  apiGraphicTitles = [];
+  apiGraphicData = [];
   graphicColor = ['#e59165', '#ff0000', '#0000ff', '#dfcc64'];
   axesColor = '#e59165';
 
   constructor(private zone: NgZone) {}
 
+  ngOnInit(): void {
+
+    this.apiGraphicTitles.push((<any>Object).keys(this.compareData));
+
+    const apiGrData = [];
+    apiGrData.push((<any>Object).values(this.compareData));
+    apiGrData[0].forEach((value) => {
+      this.apiGraphicData.push(value);
+    });
+
+  }
+
   ngAfterViewInit() {
     this.zone.runOutsideAngular(() => {
- 
-      const data1 = [
-        {
-          x: 1539129600000,
-          y: 18
-        },
-        {
-          x: 1539130500000,
-          y: 33
-        },
-        {
-          x: 1539131400000,
-          y: 18
-        },
-        {
-          x: 1539132300000,
-          y: 33
-        }
-      ];
-      const data2 = [
-        {
-          x: 1539180000000,
-          y: 57
-        },
-        {
-          x: 1539180900000,
-          y: 37
-        },
-        {
-          x: 1539181800000,
-          y: 97
-        },
-        {
-          x: 1539182700000,
-          y: 52
-        }
-      ];
-      const data3 = [
-        {
-          x: 1539180000000,
-          y: 47
-        },
-        {
-          x: 1539180900000,
-          y: 18
-        },
-        {
-          x: 1539181800000,
-          y: 90
-        },
-        {
-          x: 1539182700000,
-          y: 12
-        }
-      ];
-      const allEntryData = [data1, data2, data3];
-
       const data = [];
-      for (let i = 0; i < data1.length; i++) {
-        data.push({ date1: data1[i].x, time1: data1[i].y });
-        data.push({ date2: data1[i].x, time2: data2[i].y });
-        data.push({ date3: data1[i].x, time3: data3[i].y });
-      }
+{
+      // const data1 = [
+      //   {
+      //     x: 1539129600000,
+      //     y: 18
+      //   },
+      //   {
+      //     x: 1539130500000,
+      //     y: 33
+      //   },
+      //   {
+      //     x: 1539131400000,
+      //     y: 18
+      //   },
+      //   {
+      //     x: 1539132300000,
+      //     y: 33
+      //   }
+      // ];
+      // const data2 = [
+      //   {
+      //     x: 1539180000000,
+      //     y: 57
+      //   },
+      //   {
+      //     x: 1539180900000,
+      //     y: 37
+      //   },
+      //   {
+      //     x: 1539181800000,
+      //     y: 97
+      //   },
+      //   {
+      //     x: 1539182700000,
+      //     y: 52
+      //   }
+      // ];
+      // const data3 = [
+      //   {
+      //     x: 1539180000000,
+      //     y: 47
+      //   },
+      //   {
+      //     x: 1539180900000,
+      //     y: 18
+      //   },
+      //   {
+      //     x: 1539181800000,
+      //     y: 90
+      //   },
+      //   {
+      //     x: 1539182700000,
+      //     y: 12
+      //   }
+      // ];
+      // let allEntryData = [data1, data2, data3];
+      // console.log(allEntryData);
+} 
+      
+     const allEntryData = this.apiGraphicData;
+      console.log(allEntryData);
+
+      const firstDataSet = allEntryData[0];
+      allEntryData.map( (graphicData, graphIndex) => {
+        const index = graphIndex + 1;
+        graphicData.forEach((value: {x: number, y: number}, ind) => {
+
+          const jsonVar = {};
+          jsonVar['date' + index] = firstDataSet[ind].x;  //value.x;
+          jsonVar['time' + index] = value.y;
+
+          data.push(jsonVar);
+        });
+      });
+
+            // for (let index = 1; index <= allEntryData.length; index++) {
+      //   const graphicData = allEntryData[index - 1];
+      //   graphicData.forEach((value: {x: number, y: number}, ind) => {
+
+      //     const jsonVar = {};
+      //     jsonVar['date' + index] = firstDataSet[ind].x;  //value.x;
+      //     jsonVar['time' + index] = value.y;
+
+      //     data.push(jsonVar);
+      //   });
+      // }
+
+      // for (let i = 0; i < data1.length; i++) {
+      //   data.push({ date1: data1[i].x, time1: data1[i].y });
+      //   data.push({ date2: data1[i].x, time2: data2[i].y });
+      //   data.push({ date3: data1[i].x, time3: data3[i].y });
+      // }
 
       const chart = this.initChart('chartdiv', data, allEntryData);
-   
+
       this.chart = chart;
 
     });
