@@ -9,6 +9,7 @@ import { UpdateTableReportDTO } from '../models/table-report/update-table-report
 import { ApiService } from './api.service';
 import { ChartReport } from 'src/data/entities/chart-report.entity';
 import { UpdateChartReportDTO } from '../models/table-report/chart-report/update-chart-report.dto';
+import { CompareChartDTO } from 'src/models/table-report/chart-report/compare-chart.dto';
 
 @Controller('table-reports')
 export class TableReportsController {
@@ -90,5 +91,11 @@ export class TableReportsController {
     @Request() req,
     @Param() params): Promise<string> {
     return await this.chartReportsService.deleteChartReportById(req.user, params.tableReportId, params.chartReportId);
+  }
+
+  @Get('x/compare-chart')
+  @UseGuards(AuthGuard())
+  async compareReport(@Body() compareChartDTO: CompareChartDTO): Promise<any[]> {
+    return await this.apiService.chartReport(compareChartDTO);
   }
 }
