@@ -21,9 +21,11 @@ export class ListChartReportComponent implements OnInit {
       message => {
         this.message = message;
         this.isChartLoaded = message.length > 0;
-        //console.log('V chart list nov message: '+ message)
       }
       );
   }
 
+  deleteChart(id){
+    console.log("Delete chart: ", id);
+  }
 }

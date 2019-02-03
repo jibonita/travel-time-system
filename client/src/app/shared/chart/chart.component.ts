@@ -2,6 +2,7 @@ import { Component, NgZone, AfterViewInit, OnDestroy, Input, OnInit } from '@ang
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+import { splitDepsDsl } from '@angular/core/src/view/util';
 
 am4core.useTheme(am4themes_animated);
 
@@ -19,13 +20,14 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   apiGraphicTitles = [];
   apiGraphicData = [];
-  graphicColor = ['#e59165', '#ff0000', '#0000ff', '#dfcc64', '#19b14c', '#f04de2'];
+  graphicColor = ['#e59165', '#ff0000', '#0000ff', '#19b14c', '#dfcc64', '#f04de2'];
   axesColor = '#e59165';
 
   constructor(private zone: NgZone) {}
 
   ngOnInit(): void {
-     this.apiGraphicTitles.push((<any>Object).keys(this.compareData));
+    this.apiGraphicTitles.push((<any>Object).keys(this.compareData));
+    this.apiGraphicTitles = this.apiGraphicTitles[0];
 
     const apiGrData = [];
     apiGrData.push((<any>Object).values(this.compareData));
@@ -55,7 +57,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   initChart(chartId, data, allEntryData) {
-    const chart = am4core.create(chartId, am4charts.XYChart);
+      const chart = am4core.create(chartId, am4charts.XYChart);
 
       chart.paddingRight = 20;
 
@@ -88,6 +90,15 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
       dateAxis.renderer.grid.template.strokeOpacity = 0.07;
       valueAxis.renderer.grid.template.strokeOpacity = 0.07;
 
+      chart.colors.list = [
+        am4core.color('#845EC2'),
+        am4core.color('#D65DB1'),
+        am4core.color('#FF6F91'),
+        am4core.color('#FF9671'),
+        am4core.color('#FFC75F'),
+        am4core.color('#F9F871')
+      ];
+
       return chart;
   }
 
@@ -99,7 +110,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
     series.fill = am4core.color(this.graphicColor[index]);
     series.stroke = am4core.color(this.graphicColor[index]);
     // series.strokeWidth = 3;
-    // series.name = '';
+    series.name = this.convertDate(this.apiGraphicTitles[index]);
 
     return series;
   }
@@ -112,7 +123,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
       graphicData.forEach((value: {x: number, y: number}, ind) => {
 
         const jsonVar = {};
-        jsonVar['date' + index] = firstDataSet[ind].x;  //value.x;
+        jsonVar['date' + index] = firstDataSet[ind].x;  // value.x;
         jsonVar['time' + index] = value.y;
 
         data.push(jsonVar);
@@ -120,5 +131,12 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     return data;
+  }
+
+  convertDate(dateStr) {
+    const d = new Date(+dateStr);
+    const isoDate = d.toISOString();
+    return isoDate.substr(0, 16).replace('T', ' ');
+    
   }
 }
