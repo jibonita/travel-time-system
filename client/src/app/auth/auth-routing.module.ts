@@ -8,8 +8,8 @@ import { AnonymousRouteActivatorService } from '../core/route-guards/anonymous-r
 import { RegisterComponent } from './register/register.component';
 import { LengthDirective } from '../directives/length.directive';
 
- const ROUTES: Routes = [
-   {
+const ROUTES: Routes = [
+  {
     path: 'login',
     component: LoginComponent,
     canActivate: [AnonymousRouteActivatorService]
@@ -32,6 +32,7 @@ import { LengthDirective } from '../directives/length.directive';
     LoginComponent,
     RegisterComponent,
     LengthDirective,
-                ],
+  ],
+  exports: [LoginComponent],
 })
 export class AuthModule { }

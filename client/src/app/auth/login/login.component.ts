@@ -8,7 +8,8 @@ import { StorageService } from '../../core/storage.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -48,7 +49,4 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  public cancel(): void {
-    this.router.navigate(['/home']);
-  }
 }
