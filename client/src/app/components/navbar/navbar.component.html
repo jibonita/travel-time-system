@@ -8,26 +8,16 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-     
+
       <li class="nav-item active" *ngIf="this.isLoggedIn && this.isAdmin">
-        <a class="nav-link" 
-          [routerLink]="['/devices']" 
-          [routerLinkActive]="'active'">Devices</a>
+        <a class="nav-link" [routerLink]="['/devices']" [routerLinkActive]="'active'">Devices</a>
       </li>
-      <li class="nav-item"  *ngIf="this.isLoggedIn && this.isAdmin">
-        <a class="nav-link"
-        [routerLink]="['/users']" 
-        [routerLinkActive]="'active'" 
-        [routerLinkActiveOptions]="{exact: true}">Users</a>
+      <li class="nav-item" *ngIf="this.isLoggedIn && this.isAdmin">
+        <a class="nav-link" [routerLink]="['/users']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">Users</a>
       </li>
-    <li class="nav-item" *ngIf="this.isLoggedIn && this.isAdmin">
-      <a class="nav-link" 
-        [routerLink]="['/posts']" 
-        [routerLinkActive]="'active'" 
-        [routerLinkActiveOptions]="{exact: true}">Posts</a>
-    </li></ul>
-    
-    
+    </ul>
+
+
     <!-- <app-search-bar  *ngIf="this.isLoggedIn" class="mr-auto" [searchCallback]="this.searchCallback" [searchPlaceholder]="this.SEARCH_PLACEHOLDER"
       [defaultSearch]="this.DEFAULT_SEARCH"></app-search-bar> -->
 
@@ -38,7 +28,7 @@
       <button class="nav-link btn btn-outline-primary my-2 my-sm-0" [routerLink]="['/auth/register']">Register</button>
     </ng-container>
     <ng-container *ngIf="this.isLoggedIn">
-      <button class="nav-link btn btn-outline-primary my-2 my-sm-0" (click)="this.logout()">Logout</button>
+      <button class="btn btn-outline-primary my-2 my-sm-0" (click)="this.logout()">Logout</button>
     </ng-container>
 
   </div>
