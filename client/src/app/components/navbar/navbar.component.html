@@ -36,7 +36,6 @@
     https://stackoverflow.com/questions/39547858/angular-2-ng-container -->
     <ng-container *ngIf="!this.isLoggedIn">
       <button class="nav-link btn btn-outline-primary my-2 my-sm-0" [routerLink]="['/auth/register']">Register</button>
-      <button class="nav-link btn btn-outline-primary my-2 my-sm-0" [routerLink]="['/auth/login']">Login</button>
     </ng-container>
     <ng-container *ngIf="this.isLoggedIn">
       <button class="nav-link btn btn-outline-primary my-2 my-sm-0" (click)="this.logout()">Logout</button>

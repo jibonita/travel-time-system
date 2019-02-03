@@ -37,7 +37,7 @@
     </form>
 
     <label class="input-group-text col-sm-2" for="DateTime">
-        DateTime
+        Start Time
         <input placeholder="Date Time:"
                [(ngModel)]="startDateTime"
                [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
@@ -50,7 +50,10 @@
         [(ngModel)]="newDates">
  <owl-date-time #dt2></owl-date-time>
  <button type="button" class="btn btn-outline-dark" (click)="addNewDate(newDates); convertToMs(newDates)">Add New Date</button>
- <div *ngFor="let date of allDates">{{date}}</div>
+ <div *ngFor="let date of allDates">{{date}} 
+  <button type="button" class="btn btn-danger" (click)="deleteDate(date)">X</button>
+   
+ </div>
     </div>
   </div>
   <div class="modal-footer">

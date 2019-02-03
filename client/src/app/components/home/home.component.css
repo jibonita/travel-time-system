@@ -1,6 +1,0 @@
-.home-image{
-    background-image: url('../../../assets/img/traffic-eng.jpg');
-    background-size: cover;
-    background-position: 50%;
-    height: calc(100vh - 58px);
-}

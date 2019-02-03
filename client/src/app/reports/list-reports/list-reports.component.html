@@ -1,23 +1,18 @@
-Reports names below:
 <div *ngFor="let report of reportsList">
-  
+
   <ngb-accordion #acc="ngbAccordion">
     <ngb-panel>
       <ng-template ngbPanelTitle>
         <span> <b>{{ report.name }}</b> </span>
-        <span style="float:right">
-          <!-- <button class="btn-sm"(click)="viewRoute(report.id); $event.stopPropagation()" 
-                >View Route</button>
-          <button class="btn-sm"(click)="deleteReport(report.id); $event.stopPropagation()"
-                >delete</button> -->
+        <span id="reportoptions">
 
-                <app-report-options [report]="report"></app-report-options>
+          <app-report-options [report]="report"></app-report-options>
         </span>
-        
+
       </ng-template>
-      
+
       <ng-template ngbPanelContent>
-        
+
         <app-table-report [report]="report"></app-table-report>
 
         <app-list-chart-report [chartsList]="report.chartReports"></app-list-chart-report>
@@ -25,5 +20,5 @@ Reports names below:
       </ng-template>
     </ngb-panel>
   </ngb-accordion>
-  
+
 </div>

@@ -22,3 +22,17 @@
     position: absolute;
     z-index: 9999999 !important;
 }
+
+html{
+
+    background: url(./assets/img/traffic-eng.jpg) no-repeat center center fixed;
+    
+    -webkit-background-size: cover;
+    
+    -moz-background-size: cover;
+    
+    -o-background-size: cover;
+    
+    background-size: cover;
+    
+    }
