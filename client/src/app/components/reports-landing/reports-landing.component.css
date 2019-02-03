@@ -1,11 +1,14 @@
 .route-map, .reports-list {
     float: left;
+    box-sizing: border-box;
     border: 1px solid rgb(136, 133, 133);
-    height: 600px;
+    height: calc(100vh - 56px); /* 600px; */
+    background: white;
 }
 .route-map{
     width: 30%;
 } 
 .reports-list {
-    width: 69%
+    width: 70%;
+    overflow: scroll;
 }

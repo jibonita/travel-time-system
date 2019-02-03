@@ -1,4 +1,6 @@
-<fieldset>
-  <legend>*ngFor over all charts of this table:</legend>
-    <app-chart-report></app-chart-report>
-</fieldset>
+<div *ngFor="let chart of chartsList">
+  <div class="chart-name">{{ chart.name }}</div>
+  <button (click)="deleteChart(chart.id)">Delete Chart</button>
+  <app-chart-report (loadedChartData)="displayChart($event)"
+                    *ngIf="isChartLoaded" [chartData]="chart"></app-chart-report>
+</div>
