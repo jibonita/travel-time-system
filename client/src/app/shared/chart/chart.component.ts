@@ -13,19 +13,19 @@ am4core.useTheme(am4themes_animated);
 export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() compareData;
-  
+  @Input() chartId;
+
   private chart: am4charts.XYChart;
 
   apiGraphicTitles = [];
   apiGraphicData = [];
-  graphicColor = ['#e59165', '#ff0000', '#0000ff', '#dfcc64'];
+  graphicColor = ['#e59165', '#ff0000', '#0000ff', '#dfcc64', '#19b14c', '#f04de2'];
   axesColor = '#e59165';
 
   constructor(private zone: NgZone) {}
 
   ngOnInit(): void {
-    console.log('init na chart')
-    this.apiGraphicTitles.push((<any>Object).keys(this.compareData));
+     this.apiGraphicTitles.push((<any>Object).keys(this.compareData));
 
     const apiGrData = [];
     apiGrData.push((<any>Object).values(this.compareData));
@@ -37,9 +37,9 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.zone.runOutsideAngular(() => {
-      console.log('ngAfterViewInit na chart')
+
       const data = this.fillDataToDataArray(this.apiGraphicData);
-      const chart = this.initChart('chartdiv', data, this.apiGraphicData);
+      const chart = this.initChart(`chartdiv${this.chartId}`, data, this.apiGraphicData);
 
       this.chart = chart;
 

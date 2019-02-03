@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ChartReportComponent implements OnInit {
   data;
   message: string;
+  chartId: string;
   isChartDataLoaded = false;
   @Input() chartData;
   
@@ -43,7 +44,7 @@ export class ChartReportComponent implements OnInit {
                     // console.log(data)
                     // console.log('doidoha dannite');
                     this.isChartDataLoaded = true;
-                    
+                    this.chartId = this.chartData.id;
                 },
                 (error) => {
                   this.notificator.error(error.message, 'Unable to get data!');

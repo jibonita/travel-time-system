@@ -25,8 +25,6 @@ export class TableReportComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    console.log('report init');
-
     this.tableReportService.loadTableReports(this.report).subscribe(
       (data) => {
         this.tableReport = data;
