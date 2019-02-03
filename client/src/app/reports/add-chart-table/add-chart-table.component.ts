@@ -47,15 +47,13 @@ export class AddChartTableComponent implements OnInit {
 
   addNewDate(newDates) {
     this.allDates.push(newDates);
+    console.log(this.allDates);
+    
   }
 
   convertToMs(date) {
     const ms = date.getTime();
     this.allDatesMs.push(ms);
-  }
-
-  showDateOnModal(date) {
-    console.log(date);
   }
 
   open(content) {
@@ -92,9 +90,14 @@ export class AddChartTableComponent implements OnInit {
       periodInMilliseconds: this.addChartForm.value['period'].millisec,
       startDates: this.allDatesMs
     };
-    console.log(chartReport);
-    
     return this.AddChartReportToDB(this.reportId, chartReport);
 
+  }
+
+  deleteDate(date) {
+    const index = this.allDates.indexOf(date);
+    if (index > -1) {
+      this.allDates.splice(index, 1);
+    }
   }
 }
