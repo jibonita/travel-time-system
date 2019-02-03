@@ -46,9 +46,13 @@ export class AddChartTableComponent implements OnInit {
   }
 
   addNewDate(newDates) {
-    this.allDates.push(newDates);
-    console.log(this.allDates);
+    const date = JSON.stringify(newDates);
+    console.log(date);
+    const slicedDate = date.slice(0, -6);
+    const slicedDateBegining = slicedDate.slice(1);
+    console.log(slicedDateBegining);
     
+    this.allDates.push(slicedDateBegining);
   }
 
   convertToMs(date) {
