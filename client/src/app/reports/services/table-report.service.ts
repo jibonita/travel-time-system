@@ -47,13 +47,7 @@ export class TableReportService {
     return this.requester.post(`http://localhost:3000/table-reports/${id}/chart-reports`, JSON.stringify(chartReport));
   }
 
-  public getCompareChartData(compareData): Observable<any> {
-    const compareChart = {
-      'originID': compareData,
-      'destinationID': compareData,
-      'startDates': compareData,
-      'period': compareData
-    };
-    return this.requester.post('localhost:3000/table-reports/x/compare-chart', JSON.stringify(compareChart));
+  public getCompareChartData(compareChartData): Observable<any> {
+    return this.requester.post('http://localhost:3000/table-reports/x/compare-chart', JSON.stringify(compareChartData));
   }
 }

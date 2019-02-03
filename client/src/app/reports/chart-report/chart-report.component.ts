@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { TableReportService } from './../services/table-report.service';
+import { TableReportModel } from './../models/table-report.model';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-chart-report',
@@ -6,214 +9,68 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chart-report.component.css']
 })
 export class ChartReportComponent implements OnInit {
-  data = {
-    "1547503200000": [
-        {
-            "x": 1547503200000,
-            "y": 37
-        },
-        {
-            "x": 1547504100000,
-            "y": 34
-        },
-        {
-            "x": 1547505000000,
-            "y": 11
-        },
-        {
-            "x": 1547505900000,
-            "y": 30
-        },
-        {
-            "x": 1547506800000,
-            "y": 34
-        },
-        {
-            "x": 1547507700000,
-            "y": 14
-        },
-        {
-            "x": 1547508600000,
-            "y": 19
-        },
-        {
-            "x": 1547509500000,
-            "y": 29
-        },
-        {
-            "x": 1547510400000,
-            "y": 35
-        },
-        {
-            "x": 1547511300000,
-            "y": 14
-        },
-        {
-            "x": 1547512200000,
-            "y": 27
-        },
-        {
-            "x": 1547513100000,
-            "y": 11
-        }
-    ],
-    "1547964000000": [
-        {
-            "x": 1547964000000,
-            "y": 15
-        },
-        {
-            "x": 1547964900000,
-            "y": 35
-        },
-        {
-            "x": 1547965800000,
-            "y": 36
-        },
-        {
-            "x": 1547966700000,
-            "y": 16
-        },
-        {
-            "x": 1547967600000,
-            "y": 20
-        },
-        {
-            "x": 1547968500000,
-            "y": 34
-        },
-        {
-            "x": 1547969400000,
-            "y": 10
-        },
-        {
-            "x": 1547970300000,
-            "y": 34
-        },
-        {
-            "x": 1547971200000,
-            "y": 26
-        },
-        {
-            "x": 1547972100000,
-            "y": 10
-        },
-        {
-            "x": 1547973000000,
-            "y": 24
-        },
-        {
-            "x": 1547973900000,
-            "y": 20
-        }
-    ],
-    "1548396000000": [
-        {
-            "x": 1548396000000,
-            "y": 18
-        },
-        {
-            "x": 1548396900000,
-            "y": 29
-        },
-        {
-            "x": 1548397800000,
-            "y": 21
-        },
-        {
-            "x": 1548398700000,
-            "y": 33
-        },
-        {
-            "x": 1548399600000,
-            "y": 38
-        },
-        {
-            "x": 1548400500000,
-            "y": 33
-        },
-        {
-            "x": 1548401400000,
-            "y": 18
-        },
-        {
-            "x": 1548402300000,
-            "y": 17
-        },
-        {
-            "x": 1548403200000,
-            "y": 28
-        },
-        {
-            "x": 1548404100000,
-            "y": 21
-        },
-        {
-            "x": 1548405000000,
-            "y": 19
-        },
-        {
-            "x": 1548405900000,
-            "y": 25
-        }
-    ],
-    "1548828000000": [
-        {
-            "x": 1548828000000,
-            "y": 16
-        },
-        {
-            "x": 1548828900000,
-            "y": 35
-        },
-        {
-            "x": 1548829800000,
-            "y": 29
-        },
-        {
-            "x": 1548830700000,
-            "y": 20
-        },
-        {
-            "x": 1548831600000,
-            "y": 15
-        },
-        {
-            "x": 1548832500000,
-            "y": 33
-        },
-        {
-            "x": 1548833400000,
-            "y": 20
-        },
-        {
-            "x": 1548834300000,
-            "y": 23
-        },
-        {
-            "x": 1548835200000,
-            "y": 11
-        },
-        {
-            "x": 1548836100000,
-            "y": 34
-        },
-        {
-            "x": 1548837000000,
-            "y": 10
-        },
-        {
-            "x": 1548837900000,
-            "y": 13
-        }
-    ]
-  };
-
-  constructor() { }
+  data;
+  message: string;
+  isChartDataLoaded = false;
+  @Input() chartData;
+  
+  constructor(
+    private readonly notificator: ToastrService,
+    private readonly tableReportService: TableReportService) { }
 
   ngOnInit() {
 
+    this.tableReportService.currentChartDevices$.subscribe(
+        message => {
+          this.message = message;
+          const [origin, destination] = message.split(',');
+          const period = this.chartData.periodInMilliseconds;
+          const startDates = [];
+          this.chartData.startDates.map(date => {
+            startDates.push(date.dateInMilliseconds);
+          });
+          
+          const compareChartData = {
+            'originID': origin,
+            'destinationID': destination,
+            'startDates': startDates.join(','),
+            'period': period
+            };
+          
+            this.tableReportService.getCompareChartData(compareChartData).subscribe(
+                data => {
+                    this.data = data;
+                    // console.log(data)
+                    // console.log('doidoha dannite');
+                    this.isChartDataLoaded = true;
+                    
+                },
+                (error) => {
+                  this.notificator.error(error.message, 'Unable to get data!');
+                  
+                },
+            );
+        },
+        (error) => {
+          this.notificator.error(error.message, 'Something goes wrong!');
+          
+        },
+        );
+    
     // get chart comparison data
+    //this.data = this.pesho;
+
+
+    // const compareChartData = {
+    //     'originID': compareData,
+    //     'destinationID': compareData,
+    //     'startDates': compareData,
+    //     'period': compareData
+    //   };
+      
+    // this.tableReportService.getCompareChartData(compareChartData).subscribe(
+
+    //);
   }
 
 }

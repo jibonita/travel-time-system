@@ -93,7 +93,7 @@ export class TableReportsController {
     return await this.chartReportsService.deleteChartReportById(req.user, params.tableReportId, params.chartReportId);
   }
 
-  @Get('x/compare-chart')
+  @Post('x/compare-chart')
   @UseGuards(AuthGuard())
   async compareReport(@Body() compareChartDTO: CompareChartDTO): Promise<any[]> {
     return await this.apiService.chartReport(compareChartDTO);

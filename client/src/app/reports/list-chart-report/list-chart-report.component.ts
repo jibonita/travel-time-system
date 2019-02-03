@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { ChartReportComponent } from './../chart-report/chart-report.component';
+import { Component, OnInit, Input,  AfterViewInit } from '@angular/core';
 import { TableReportService } from '../services/table-report.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { TableReportService } from '../services/table-report.service';
 })
 export class ListChartReportComponent implements OnInit {
   message: string;
+  isChartLoaded = false;
   @Input() chartsList;
 
   constructor(
@@ -15,12 +17,11 @@ export class ListChartReportComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.chartsList);
-
-    this.tableReportService.currentChartDevices$.subscribe(
+     this.tableReportService.currentChartDevices$.subscribe(
       message => {
         this.message = message;
-        console.log('V chart list nov message: '+ message)
+        this.isChartLoaded = message.length > 0;
+        //console.log('V chart list nov message: '+ message)
       }
       );
   }

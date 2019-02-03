@@ -42,10 +42,10 @@ export class TableReportComponent implements OnInit, OnDestroy {
   }
 
   loadChart(origin, destination) {
-    this.tableReportService.changeDevices(`Table-report passes ${origin} => ${destination}`);
+    this.tableReportService.changeDevices(`${origin},${destination}`);
 
-    console.log('load chart', origin, '=>', destination);
+    // console.log('load chart', origin, '=>', destination);
     // 1. check for charts per this  table
     // 2. get data per each chart
-  }
+  };
 }

@@ -26,8 +26,8 @@ export class ApiService {
     const destinationID = compareChartDTO.destinationID;
     const startDates: string = compareChartDTO.startDates;
     const period: number = compareChartDTO.period;
-    // // tslint:disable-next-line:max-line-length
-    const url = `http://ec2-35-158-53-19.eu-central-1.compute.amazonaws.com:8080/api/comparePeriods?originDeviceId==${originID}&destinationDeviceId=${destinationID}&startDates=${startDates}&periodLength=${period}`;
+     // tslint:disable-next-line:max-line-length
+    const url = `http://ec2-35-158-53-19.eu-central-1.compute.amazonaws.com:8080/api/comparePeriods?originDeviceId=${originID}&destinationDeviceId=${destinationID}&startDates=${startDates}&periodLength=${period}`;
     const result = await this.httpService.get(url).toPromise();
     return result.data;
   }

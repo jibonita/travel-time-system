@@ -1,4 +1,5 @@
-<fieldset>
-  <legend>*ngFor over all charts of this table:</legend>
-    <app-chart-report></app-chart-report>
+<fieldset *ngFor="let chart of chartsList">
+  <legend>{{ chart.name }}</legend>
+  <app-chart-report (loadedChartData)="displayChart($event)"
+                    *ngIf="isChartLoaded" [chartData]="chart"></app-chart-report>
 </fieldset>

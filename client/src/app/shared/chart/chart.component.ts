@@ -24,7 +24,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private zone: NgZone) {}
 
   ngOnInit(): void {
-
+    console.log('init na chart')
     this.apiGraphicTitles.push((<any>Object).keys(this.compareData));
 
     const apiGrData = [];
@@ -37,7 +37,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.zone.runOutsideAngular(() => {
-
+      console.log('ngAfterViewInit na chart')
       const data = this.fillDataToDataArray(this.apiGraphicData);
       const chart = this.initChart('chartdiv', data, this.apiGraphicData);
 
