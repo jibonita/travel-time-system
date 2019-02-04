@@ -24,14 +24,16 @@ export class UsersListComponent implements OnInit {
   }
 
   updateUsersList(user) {
-    console.log(user);
-    
     this.usersList.push(user);
   }
-  deleteUser(email): void {
-    this.usersService.deleteUser(email).subscribe(
+
+  deleteUser(user): void {
+    this.usersService.deleteUser(user).subscribe(
       () => {
         this.notificator.success('User deleted successfully!');
+        this.usersList = this.usersList.filter((vUser ) => {
+          return vUser.email !== user.email;
+        });
       },
       error => {
         console.log(error);

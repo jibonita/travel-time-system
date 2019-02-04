@@ -14,18 +14,13 @@ export class RegisterTechUserComponent implements OnInit {
   regForm: FormGroup;
 
   @ViewChild(МodalComponent) public modal: МodalComponent;
-  
+  @Output() public newTechUser = new EventEmitter<FormGroup>();
+
   constructor(
     private readonly authService: AuthService,
     private readonly notificator: NotificatorService,
     private formBuilder: FormBuilder
   ) { }
-
-  @Output() public newTechUser = new EventEmitter<FormGroup>();
-
-  public emitNewTechUserAddedEvent(value): void {
-    this.newTechUser.emit(value);
-  }
 
   ngOnInit(): void {
     this.regForm = this.formBuilder.group({
@@ -49,6 +44,10 @@ export class RegisterTechUserComponent implements OnInit {
     );
   }
 
+  public emitNewTechUserAddedEvent(value): void {
+    this.newTechUser.emit(value);
+  }
+  
   public showUserForm(): void {
     this.modal.open();
   }
