@@ -9,7 +9,6 @@ export class SentenceCasePipe implements PipeTransform {
     if (value) {
       const newValue = value.replace(value.charAt(0), value.charAt(0).toUpperCase());
       if (exclaim) {
-
         return newValue + ':';
       }
       return newValue;

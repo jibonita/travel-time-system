@@ -5,12 +5,12 @@
 <div class="card"  [class.highlight]="this.isHighlighted">
     <div class="card-body">
         <app-modal>
-            <div class="title">{{ title }}</div>
+            <div class="title">{{ title | sentenceCase}} Device</div>
             <div class="body">
               
               <form [formGroup]="addDeviceForm" >  <!-- (ngSubmit)="addDevice()" -->
                 <div class="form-group">
-                  <label  for="name">Name</label>
+                  <label  for="name">{{'name' | sentenceCase:true }}</label>
                   <input  required 
                     class="form-control" 
                     id="name" 

@@ -49,7 +49,7 @@ export class DeviceAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = this.isAddDevice ? 'Edit Device' : 'New Device';
+    this.title = this.isAddDevice ? 'edit' : 'new';
 
     const name = this.formBuilder.control(
       this.isAddDevice ? this.isAddDevice['name'] : '',

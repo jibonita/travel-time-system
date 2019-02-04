@@ -50,4 +50,8 @@ export class TableReportService {
   public getCompareChartData(compareChartData): Observable<any> {
     return this.requester.post('http://localhost:3000/table-reports/x/compare-chart', JSON.stringify(compareChartData));
   }
+
+  public deleteChartReport(id): Observable<any> {
+    return this.requester.delete(`http://localhost:3000/table-reports/${id}`);
+  }
 }
