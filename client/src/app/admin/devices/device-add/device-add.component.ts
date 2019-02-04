@@ -32,6 +32,7 @@ export class DeviceAddComponent implements OnInit {
   addDeviceForm: FormGroup;
   closeResult: string;
   title: string;
+  
   @Input() isAddDevice: boolean;
   @Input() devid: string;
 
@@ -68,7 +69,8 @@ export class DeviceAddComponent implements OnInit {
       longitude,
       latitude
     });
-  }
+
+ }
 
   loadDeviceModal() {
     this.modal.open();
