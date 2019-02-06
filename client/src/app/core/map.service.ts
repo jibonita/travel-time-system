@@ -10,7 +10,8 @@ export class MapService {
   private defaultLatLon = [42.698289, 23.324640]; // Sofia by default
 
   private streetMap;
-  private marker: any;
+  private marker;
+  private routeControl: L.Routing.Control;
 
   public get getMap() {
     return this.streetMap;
@@ -50,14 +51,16 @@ export class MapService {
   showRoute(coords){
     const points = coords.map(L.latLng);
     
-    L.Routing.control({
-      waypoints: points
-    }).addTo(this.streetMap);
+    this.routeControl = L.Routing.control({
+        waypoints: points
+      }).addTo(this.streetMap);
+
   }
 
   clearRoutes() {
-   // this.streetMap.clearLayers();
-   console.log('how to clear old routes?')
+    if (this.routeControl) {
+      this.routeControl.getPlan().setWaypoints([]);
+    }
   }
 
   getMapLatLon(e) {

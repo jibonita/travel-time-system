@@ -24,6 +24,8 @@ export class StreetMapComponent implements  DoCheck, OnDestroy {
 
       if (!this.mapService.getMap) {
         this.mapService.initMap(mapId, [], 13);
+        console.log('map loaded');
+        
        }
 
     }
