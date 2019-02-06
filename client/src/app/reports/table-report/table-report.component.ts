@@ -50,10 +50,6 @@ export class TableReportComponent implements OnInit, OnDestroy {
     this.loadChart(origin, destination)
   }
 
-  loadChart(origin, destination) {
-    this.tableReportService.changeDevices(`${origin},${destination}`);
-  };
-
   viewOnMap(origin, destination){
     const devices = this.report.devices
         .filter(this.searchDevicesByName(origin, destination))
@@ -61,6 +57,10 @@ export class TableReportComponent implements OnInit, OnDestroy {
     
     this.mapService.showRoute(devices);
   }
+
+  loadChart(origin, destination) {
+    this.tableReportService.changeDevices(`${origin},${destination}`);
+  };
 
   getLatLonPair(device){
     return [+device.latitude, +device.longitude];

@@ -23,6 +23,8 @@ export class ChartReportComponent implements OnInit {
 
     this.tableReportService.currentChartDevices$.subscribe(
         message => {
+          this.isChartDataLoaded = false;
+
           this.message = message;
           const [origin, destination] = message.split(',');
           const period = this.chartData.periodInMilliseconds;
@@ -38,11 +40,11 @@ export class ChartReportComponent implements OnInit {
             'period': period
             };
           
-            this.tableReportService.getCompareChartData(compareChartData).subscribe(
+          this.tableReportService.getCompareChartData(compareChartData).subscribe(
                 data => {
                     this.data = data;
-                    // console.log(data)
-                    // console.log('doidoha dannite');
+                    console.log('doidoha dannite');
+                    console.log(data)
                     this.isChartDataLoaded = true;
                     this.chartId = this.chartData.id;
                 },
@@ -58,20 +60,6 @@ export class ChartReportComponent implements OnInit {
         },
         );
     
-    // get chart comparison data
-    //this.data = this.pesho;
-
-
-    // const compareChartData = {
-    //     'originID': compareData,
-    //     'destinationID': compareData,
-    //     'startDates': compareData,
-    //     'period': compareData
-    //   };
-      
-    // this.tableReportService.getCompareChartData(compareChartData).subscribe(
-
-    //);
-  }
+   }
 
 }
