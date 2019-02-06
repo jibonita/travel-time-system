@@ -1,7 +1,7 @@
 <button *ngIf="!isAddDevice" (click)="loadDeviceModal()" class="btn btn-lg btn-outline-primary" >Add Device </button>
 <button *ngIf="!!isAddDevice"  (click)="loadDeviceModal()"  class="btn btn-warning" >Edit</button>
 
-<div class="card"  [class.highlight]="this.isHighlighted">
+<div class="card  modal-lg"  [class.highlight]="this.isHighlighted">
     <div class="card-body">
         <app-modal>
             <div class="title">{{ title | sentenceCase}} Device</div>
@@ -19,16 +19,6 @@
                   <div [hidden]="!(this.addDeviceForm.get('name').hasError('required') && this.addDeviceForm.dirty)">Required</div>
                 </div>
                 <div class="form-group">
-                  <label  for="longitude">{{'longitude' | sentenceCase:true}}</label>
-                  <input 
-                    class="form-control" 
-                    id="longitude" 
-                    type="text" 
-                    placeholder="longitude..."
-                    formControlName="longitude" 
-                />
-                </div>
-                <div class="form-group">
                   <label  for="latitude">{{'latitude' | sentenceCase:true}}</label>
                   <input 
                     class="form-control" 
@@ -38,6 +28,16 @@
                     formControlName="latitude" 
                 />
                 </div>                 
+                <div class="form-group">
+                  <label  for="longitude">{{'longitude' | sentenceCase:true}}</label>
+                  <input 
+                    class="form-control" 
+                    id="longitude" 
+                    type="text" 
+                    placeholder="longitude..."
+                    formControlName="longitude" 
+                />
+                </div>
               </form>
                <div class="map-container">
                  <app-street-map [mapid]="devid"></app-street-map>
