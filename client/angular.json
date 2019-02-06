@@ -27,7 +27,8 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/toastr/build/toastr.min.css",
               "./node_modules/ngx-toastr/toastr.css",
-              "src/assets/leaflet/leaflet.css"
+              "src/assets/leaflet/leaflet.css",
+              "./node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",

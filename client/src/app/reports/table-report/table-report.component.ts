@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TableReportService } from '../services/table-report.service';
 import { ReportDataListenerService } from '../services/report-data-listener.service';
 import { MapService } from 'src/app/core/map.service';
+import { SearchBarComponent } from 'src/app/shared/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-table-report',
@@ -43,15 +44,34 @@ export class TableReportComponent implements OnInit, OnDestroy {
     this.mapService.clearRoutes();
   }
 
+  cellClickedActions(origin, destination) {
+    this.viewOnMap(origin, destination);
+    
+    this.loadChart(origin, destination)
+  }
+
   loadChart(origin, destination) {
     this.tableReportService.changeDevices(`${origin},${destination}`);
-
-    // console.log('load chart', origin, '=>', destination);
-    // 1. check for charts per this  table
-    // 2. get data per each chart
   };
+
+  viewOnMap(origin, destination){
+    const devices = this.report.devices
+        .filter(this.searchDevicesByName(origin, destination))
+        .map(this.getLatLonPair);
+    
+    this.mapService.showRoute(devices);
+  }
 
   getLatLonPair(device){
     return [+device.latitude, +device.longitude];
   }
+
+  searchDevicesByName(origin, destination) {
+      const searchDevice = (device) => {
+        return [origin, destination].indexOf(device.name) >-1;
+      }
+      
+      return searchDevice;
+  }
+
 }

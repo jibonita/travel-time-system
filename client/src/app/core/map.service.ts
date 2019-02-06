@@ -29,15 +29,26 @@ export class MapService {
         'pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1ndnJkMGdobjN5cDg5aW40eWZuZCJ9.FM_p6c5qLi6gD8Tem-88MA';
       const secondToken =
         'pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1ydnUxMHJ2YjQ0bDh1cjllazQ4ayJ9.Yy7row2YHGvKUxrOgv-fgA';
+      // L.tileLayer(
+      //   `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${mapBoxToken}`,
+      //   {
+      //     attribution: "",
+      //     maxZoom: 18,
+      //     id: 'mapbox.streets',
+      //     accessToken: mapBoxToken
+      //   }
+      // ).addTo(myMap);
+
+      //L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/mapbox.streets/tiles/{z}/{x}/{y}?access_token=${mapBoxToken}`).addTo(myMap);
+
       L.tileLayer(
-        `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${mapBoxToken}`,
+        `https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=${mapBoxToken}`,
         {
-          attribution: ``,
+          attribution: "",
           maxZoom: 18,
-          id: 'mapbox.streets',
-          accessToken: mapBoxToken
         }
       ).addTo(myMap);
+
 
       this.streetMap = myMap;
       
@@ -49,12 +60,22 @@ export class MapService {
   }
 
   showRoute(coords){
+    this.clearRoutes();
+
     const points = coords.map(L.latLng);
+    console.log(points)
     
-    this.routeControl = L.Routing.control({
-        waypoints: points
+    try {
+      this.routeControl = L.Routing.control({
+        waypoints: points,
+        
       }).addTo(this.streetMap);
 
+      this.routeControl.hide();
+    } catch (error) {
+      console.log('Error in OSRM API')
+    }
+    
   }
 
   clearRoutes() {

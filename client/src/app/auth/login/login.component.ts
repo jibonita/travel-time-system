@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/landing']);
       },
       error => {
-        console.log(error);
-        this.notificator.error(error.message, 'Login failed!');
+        //console.log(error);
+        this.notificator.error(error.error.message, 'Login failed!');
       }
     );
   }
