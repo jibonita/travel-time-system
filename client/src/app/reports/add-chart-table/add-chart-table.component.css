@@ -1,0 +1,9 @@
+#datetime {
+    width: 500px;
+    position: relative;
+    left: 25px
+  }
+
+  #dates {
+      padding-top: 10px
+  }
