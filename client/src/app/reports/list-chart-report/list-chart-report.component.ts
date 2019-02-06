@@ -10,6 +10,7 @@ import { TableReportService } from '../services/table-report.service';
 export class ListChartReportComponent implements OnInit {
   message: string;
   isChartLoaded = false;
+  devicesToCompare;
   @Input() chartsList;
 
   constructor(
@@ -25,7 +26,14 @@ export class ListChartReportComponent implements OnInit {
       );
   }
 
-  deleteChart(id){
-    console.log("Delete chart: ", id);
+  deleteChart(chartIdToDelete){
+    this.tableReportService.deleteChartReport(chartIdToDelete).subscribe(
+      (data) =>{
+        this.chartsList = this.chartsList.filter((chart) => chart.id != chartIdToDelete);
+      },
+      (error) => {
+
+      }      
+    );
   }
 }

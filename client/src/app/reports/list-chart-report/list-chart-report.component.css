@@ -1,0 +1,10 @@
+.chart-container{
+    padding: 20px;
+}
+.chart-name {
+    display: inline-block;
+}
+button {
+    position: absolute;
+    right: 20px;
+}

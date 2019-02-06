@@ -59,6 +59,6 @@ export class TableReportService {
   }
 
   public deleteChartReport(id): Observable<any> {
-    return this.requester.delete(`http://localhost:3000/table-reports/${id}`);
+    return this.requester.delete(`http://localhost:3000/table-reports/x/chart-reports/${id}`);
   }
 }
