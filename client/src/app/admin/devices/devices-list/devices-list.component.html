@@ -2,28 +2,30 @@
   [isAddDevice]="setDisplay(false)" 
   [devid]="'dev0'"></app-device-add>
 
-<table class="table" *ngIf="devicesList?.length > 0">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Longitude</th>
-      <th scope="col">Latitude</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let device of devicesList; let i = index">
-      <th scope="row">{{i+1}}</th>
-      <td>{{device.name}}</td>
-      <td>{{device.longitude}}</td>
-      <td>{{device.latitude}}</td>
-      <td>  
-        <button type="button" class="btn btn-danger" (click)="deleteDevice(device)">Delete</button>
-        <app-device-add (updateDevice)="this.updateList($event, i)" 
-                [isAddDevice]="setDisplay(device)" 
-                [devid]="'dev'+(i+1)"></app-device-add>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-wrapper">
+  <table class="table" *ngIf="devicesList?.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Longitude</th>
+        <th scope="col">Latitude</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let device of devicesList; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{device.name}}</td>
+        <td>{{device.longitude}}</td>
+        <td>{{device.latitude}}</td>
+        <td>  
+          <button type="button" class="btn btn-danger" (click)="deleteDevice(device)">Delete</button>
+          <app-device-add (updateDevice)="this.updateList($event, i)" 
+                  [isAddDevice]="setDisplay(device)" 
+                  [devid]="'dev'+(i+1)"></app-device-add>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,7 +1,6 @@
-    <button *ngIf="!isAddDevice" (click)="loadDeviceModal()"
-        class="btn btn-lg btn-outline-primary" >Add Device </button>
-    <button *ngIf="!!isAddDevice"  (click)="loadDeviceModal()"
-        class="btn btn-warning" >Edit</button>
+<button *ngIf="!isAddDevice" (click)="loadDeviceModal()" class="btn btn-lg btn-outline-primary" >Add Device </button>
+<button *ngIf="!!isAddDevice"  (click)="loadDeviceModal()"  class="btn btn-warning" >Edit</button>
+
 <div class="card"  [class.highlight]="this.isHighlighted">
     <div class="card-body">
         <app-modal>

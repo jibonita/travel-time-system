@@ -13,6 +13,13 @@ export class TableReportService {
     this.chartDevicesSourse$.next(message);
   }
 
+  private tableListStateSource$ = new BehaviorSubject(null);
+  currenttableListState$ = this.tableListStateSource$.asObservable();
+
+  changeTableListState(state: TableReportModel[]) {
+    this.tableListStateSource$.next(state)
+  }
+
   public constructor(private readonly requester: RequesterService) {}
 
   public createTableReport(tableReport: TableReportModel): Observable<TableReportModel[]> {

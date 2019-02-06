@@ -1,25 +1,27 @@
 <app-register-tech-user (newTechUser)="this.updateUsersList($event)"></app-register-tech-user>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Action</th>
-            <th scope="col">Assign Device</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let user of usersList; let i = index" id="{{user.email}}{{i}}">
-            <th scope="row">{{i+1}}</th>
-            <th scope="row" >{{user.email}}</th>
-            <th scope="row">
-                <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
-            </th>
-            <app-assign-device [user]="user.email"></app-assign-device>
-            <th>
-            </th>
-        </tr>
+<div class="table-wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Action</th>
+                <th scope="col">Assign Device</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of usersList; let i = index" id="{{user.email}}{{i}}">
+                <th scope="row">{{i+1}}</th>
+                <th scope="row" >{{user.email}}</th>
+                <th scope="row">
+                    <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+                </th>
+                <app-assign-device [user]="user.email"></app-assign-device>
+                <th>
+                </th>
+            </tr>
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

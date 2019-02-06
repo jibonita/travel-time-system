@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./list-reports.component.css']
 })
 export class ListReportsComponent implements OnInit {
+  
   reportsList: TableReportModel[];
 
   constructor(
@@ -22,11 +23,21 @@ export class ListReportsComponent implements OnInit {
           this.reportsList = data;
          }
       );
+
+      this.tableReportService.currenttableListState$.subscribe(
+        (data) => {
+          console.log(data)
+          console.log(this.reportsList)
+          if(this.reportsList){
+            this.reportsList.unshift(data);
+          }
+        }
+      );
   }
 
   viewRoute(reportId) {
     console.log('view report map' + reportId);
   }
 
-
+  
 }

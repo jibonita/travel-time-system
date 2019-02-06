@@ -36,7 +36,8 @@ export class TableReportsController {
   async create(@Request() req, @Body() tableReportDTO: CreateTableReportDTO) {
     try {
       const tableReport = await this.tableReportsService.createTableReport(tableReportDTO, req.user);
-      return await this.apiService.tableReport(tableReport);
+      return tableReport;
+      //return await this.apiService.tableReport(tableReport);
     } catch (error) {
        console.log(error.message)
     }

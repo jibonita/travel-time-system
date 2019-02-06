@@ -1,6 +1,6 @@
 import { TableReportService } from './../services/table-report.service';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { МodalComponent } from 'src/app/shared/modal/modal.component';
 import { DevicesService } from 'src/app/admin/devices/services/devices.service';
 import { TableReportModel } from '../models/table-report.model';
@@ -29,6 +29,7 @@ export class NewReportComponent implements OnInit {
 
   @ViewChild(МodalComponent) public modal: МodalComponent;
 
+ 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notificator: ToastrService,
@@ -78,8 +79,7 @@ export class NewReportComponent implements OnInit {
     this.tableReportService.createTableReport(tableReport).subscribe(
       (data) => {
         this.notificator.success('Report created successfully!');
-        // TODO: UPDATE TABLE REPORT LIST WITH THE NEW REPORT
-        console.log(data);
+        this.tableReportService.changeTableListState(data);
       },
       error => {
         this.notificator.error(error.message, 'Report creation failed!');

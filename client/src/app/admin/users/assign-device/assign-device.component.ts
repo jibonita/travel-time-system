@@ -1,10 +1,9 @@
-import { DeviceModel } from './../models/device.model';
 import { DevicesService } from './../../devices/services/devices.service';
-import { Component, OnInit, ViewChild, ElementRef, Host, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NotificatorService } from 'src/app/core/notificator.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UsersListComponent } from '../users-list/users-list.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { МodalComponent } from 'src/app/shared/modal/modal.component';
 
 @Component({
   selector: 'app-assign-device',
@@ -14,16 +13,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AssignDeviceComponent implements OnInit {
   deviceList: any[] = [];
   addMultipleDevicesForm: FormGroup;
+  closeResult: string;
+
   @Input() user: string;
 
-  closeResult: string;
+  @ViewChild(МodalComponent) public modal: МodalComponent;
 
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly devicesService: DevicesService,
     private readonly notificator: NotificatorService,
-
-    private readonly modalService: NgbModal,
   ) {  }
 
   ngOnInit() {
@@ -31,30 +30,23 @@ export class AssignDeviceComponent implements OnInit {
       (result) => {
         this.deviceList = result;
     });
-    // get already assigned devices fro this user
-    //console.log(this.user);
-    
-    // this.devicesService.getAllUserAssignedDevices(this.user).subscribe(
-    //   (result) => {
-    // });
-
-
-    const name = this.formBuilder.control('', [Validators.required]);
     this.addMultipleDevicesForm = this.formBuilder.group({
     });
   }
 
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      // this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      // this.closeResult = `Dismissed`;
-    });
-  }
+  // open(content) {
+  //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(() => {
+  //     // this.closeResult = `Closed with: ${result}`;
+  //   }, () => {
+  //     // this.closeResult = `Dismissed`;
+  //   });
+  // }
 
   addMultipleDevices(devices) {
+    this.modal.close();
     const devicesID = [];
+
     devices.forEach(element => {
       if (element.isActive === true) {
         const device = element.id;
@@ -65,11 +57,10 @@ export class AssignDeviceComponent implements OnInit {
     this.devicesService.assignDevice(this.user, devicesID).subscribe(
       () => {
         this.notificator.success('Devices assigned successfully!');
-        this.modalService.dismissAll();
       },
       error => {
         console.log(error);
-        //this.notificator.error(error.message, 'Device add failed!');
+        this.notificator.error(error.message, 'Devices assign failed!');
       }
     );
   }
