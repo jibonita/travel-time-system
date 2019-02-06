@@ -86,11 +86,12 @@ export class TableReportsController {
     return await this.chartReportsService.updateChartReport(req.user, params.tableReportId, params.chartReportId, updateChartReportDTO);
   }
 
-  @Delete(':tableReportId/chart-reports/:chartReportId')
+  //@Delete(':tableReportId/chart-reports/:chartReportId')
+  @Delete('x/chart-reports/:chartReportId')
   @UseGuards(AuthGuard())
   async deleteChartReportById(
     @Request() req,
-    @Param() params): Promise<string> {
+    @Param() params): Promise<ChartReport> {
     return await this.chartReportsService.deleteChartReportById(req.user, params.tableReportId, params.chartReportId);
   }
 

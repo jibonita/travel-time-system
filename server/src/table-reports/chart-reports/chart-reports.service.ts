@@ -104,10 +104,10 @@ export class ChartReportsService {
         return `Chart table report with id "${chartReportId}" was successfully updated.`;
     }
 
-    async deleteChartReportById(user: User, tableReportId: string, chartReportId: string): Promise<string> {
-        const table: TableReport = await this.tableReportsService.getTableReportById(tableReportId);
+    async deleteChartReportById(user: User, tableReportId: string, chartReportId: string): Promise<ChartReport> {
+        // const table: TableReport = await this.tableReportsService.getTableReportById(tableReportId);
 
-        this.tableReportsService.confirmCurrentUser(user, table.user);
+        // this.tableReportsService.confirmCurrentUser(user, table.user);
 
         const chartToDelete: ChartReport = await this.chartRepository.findOne({ where: { id: chartReportId } });
 
@@ -117,6 +117,7 @@ export class ChartReportsService {
 
         await this.chartRepository.delete(chartReportId);
 
-        return `Chart report with id "${chartReportId}" was successfully deleted.`;
+        //return `Chart report with id "${chartReportId}" was successfully deleted.`;
+        return chartToDelete;
     }
 }
