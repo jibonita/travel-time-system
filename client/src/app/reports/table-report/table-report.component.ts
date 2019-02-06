@@ -1,8 +1,7 @@
-import { TableReportModel } from './../models/table-report.model';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TableReportService } from '../services/table-report.service';
-import { RequesterService } from 'src/app/core/requester.service';
+import { ReportDataListenerService } from '../services/report-data-listener.service';
+import { MapService } from 'src/app/core/map.service';
 
 @Component({
   selector: 'app-table-report',
@@ -19,8 +18,9 @@ export class TableReportComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private http: HttpClient,
+    private readonly mapService: MapService,
     private readonly tableReportService: TableReportService,
+    private readonly reportDataListenerService: ReportDataListenerService
   ) {  }
 
 
@@ -28,6 +28,9 @@ export class TableReportComponent implements OnInit, OnDestroy {
     this.tableReportService.loadTableReports(this.report).subscribe(
       (data) => {
         this.tableReport = data;
+
+        const devices = this.report.devices.map(this.getLatLonPair);
+        this.reportDataListenerService.changeRouteToDraw(devices);
       }
     );
 
@@ -37,6 +40,7 @@ export class TableReportComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('report destroy');
+    this.mapService.clearRoutes();
   }
 
   loadChart(origin, destination) {
@@ -46,4 +50,8 @@ export class TableReportComponent implements OnInit, OnDestroy {
     // 1. check for charts per this  table
     // 2. get data per each chart
   };
+
+  getLatLonPair(device){
+    return [+device.latitude, +device.longitude];
+  }
 }

@@ -14,6 +14,8 @@ import { ReportOptionsComponent } from './report-options/report-options.componen
 import { AddChartTableComponent } from './add-chart-table/add-chart-table.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { FormsModule } from '@angular/forms';
+import { StreetRouteComponent } from './street-route/street-route.component';
+import { ReportDataListenerService } from './services/report-data-listener.service';
 
 @NgModule({
   declarations: [
@@ -23,10 +25,11 @@ import { FormsModule } from '@angular/forms';
     ChartReportComponent,
     ListChartReportComponent,
     ReportOptionsComponent,
-    AddChartTableComponent
+    AddChartTableComponent,
+    StreetRouteComponent
   ],
   imports: [CommonModule, SharedModule, ReactiveFormsModule, NgbModule, OwlDateTimeModule, OwlNativeDateTimeModule, FormsModule],
-  providers: [DevicesService, TableReportService],
-  exports: [NewReportComponent, ListReportsComponent]
+  providers: [DevicesService, TableReportService, ReportDataListenerService],
+  exports: [NewReportComponent, ListReportsComponent, StreetRouteComponent]
 })
-export class ReportsModule {}
+export class ReportsModule { }

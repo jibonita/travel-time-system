@@ -1,6 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
-// declare let L;
+ //declare let L;
+//import * as L from 'leaflet';
+//import {Map} from 'leaflet';
 import * as L from 'leaflet';
+import 'leaflet-routing-machine';
 
 @Injectable()
 export class MapService {
@@ -36,6 +39,7 @@ export class MapService {
       ).addTo(myMap);
 
       this.streetMap = myMap;
+      
     } else {
       this.streetMap = null;
     }
@@ -43,7 +47,20 @@ export class MapService {
     return this.streetMap;
   }
 
-  public getMapLatLon(e) {
+  showRoute(coords){
+    const points = coords.map(L.latLng);
+    
+    L.Routing.control({
+      waypoints: points
+    }).addTo(this.streetMap);
+  }
+
+  clearRoutes() {
+   // this.streetMap.clearLayers();
+   console.log('how to clear old routes?')
+  }
+
+  getMapLatLon(e) {
     try {
       return [e.latlng.lat, e.latlng.lng];
     } catch (error) {
@@ -51,7 +68,7 @@ export class MapService {
     }
   }
 
-  public addMarker(latlon) {
+  addMarker(latlon) {
     if (this.marker) {
       this.streetMap.removeLayer(this.marker); // other: removeControl(marker);
     }

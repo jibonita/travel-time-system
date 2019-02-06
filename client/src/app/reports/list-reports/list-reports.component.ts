@@ -24,10 +24,8 @@ export class ListReportsComponent implements OnInit {
          }
       );
 
-      this.tableReportService.currenttableListState$.subscribe(
+      this.tableReportService.currentTableListState$.subscribe(
         (data) => {
-          console.log(data)
-          console.log(this.reportsList)
           if(this.reportsList){
             this.reportsList.unshift(data);
           }

@@ -14,7 +14,7 @@ export class TableReportService {
   }
 
   private tableListStateSource$ = new BehaviorSubject(null);
-  currenttableListState$ = this.tableListStateSource$.asObservable();
+  currentTableListState$ = this.tableListStateSource$.asObservable();
 
   changeTableListState(state: TableReportModel[]) {
     this.tableListStateSource$.next(state)
