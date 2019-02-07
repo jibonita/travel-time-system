@@ -87,7 +87,7 @@ export class DeviceAddComponent implements OnInit {
 
     if (!this.mapService.getMap) {
       const mapId = `mapid${this.devid}`;
-      this.mapService.initMap(mapId, latLon, 13);
+      this.mapService.initMap(mapId, latLon, 14);
     }
 
     this.mapService.getMap.on('click', e => {

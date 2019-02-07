@@ -42,7 +42,7 @@ export class ReportOptionsComponent implements OnInit {
     );
   }
 
-  viewRouteOnStreetMap(report){
+  viewRouteOnStreetMap(report) {
     const devices = report.devices.map(this.getLatLonPair);
 
     this.reportDataListenerService.changeRouteToDraw(devices);

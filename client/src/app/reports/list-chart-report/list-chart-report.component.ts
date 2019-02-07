@@ -20,14 +20,20 @@ export class ListChartReportComponent implements OnInit, OnDestroy {
   ngOnInit() {
      this.tableReportService.currentChartDevices$.subscribe(
       devices => {
-        //this.message = devices;
-        this.isChartLoaded = devices.length > 0;
-        this.devicesToCompare = `( ${devices.split(',').join(' - ')} )`;
+        // this.message = devices;
+        if (devices.length > 0) {
+          this.isChartLoaded = true;
+          this.devicesToCompare = `( ${devices.split(',').join(' - ')} )`;
+        } else {
+          this.devicesToCompare = '';
+        }
+        // this.isChartLoaded = devices.length > 0;
+        // this.devicesToCompare = `( ${devices.split(',').join(' - ')} )`;
       }
       );
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.devicesToCompare = '';
   }
 
