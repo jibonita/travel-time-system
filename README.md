@@ -20,18 +20,18 @@ Then navigate to frontend folder then navigate to the client folder and run:
 ```
 npm install
 ```
-After all the dependancies are downloaded ensure that you have MariaDB service up and running and create a database named timetravelsystem. This can be changed in the config.json file inside the server folder. From the backend folder, you need to enter the db folder and run the following commands to init the database and add the migrations and the seeds:
+After all the dependancies are downloaded ensure that you have MariaDB service up and running and create a database named **timetravelsystem**. This can be changed in the config.json file inside the server folder. From the backend folder, you need to enter the db folder and run the following commands to init the database and add the migrations and the seeds:
 ```
 cd db/   (to change to the db folder)
 ../node_modules/.bin/sequelize db:migrate
 ../node_modules/.bin/sequelize db:seed:all
 cd ..  (to change back to the root folder)
 ```
-Locally the app is set up to work on port 8000. to run the backend server from the folder backend use the command:
+To run the backend server, open git bash from the folder **server**  and use the command:
 ```
-node server.js
+npm run start
 ```
-Now it's time to run the frontend. Navigate to frontend folder and in the terminal use the command:
+Now it's time to run the frontend. Navigate to **client** folder and in the terminal use the command:
 ```
 ng serve -o
 ```
@@ -56,6 +56,7 @@ in the respective folders frontend and backend.
 ## Authors<a name ="authors"></a>
 
 Osman Yumer   - [o.yumer](#https://gitlab.com/o.yumer) 
+
 Stefka Marinova - [jibonita](#https://gitlab.com/jibonita)
 
 ## License<a name ="license"></a>
