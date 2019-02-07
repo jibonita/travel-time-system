@@ -63,7 +63,7 @@ export class MapService {
     this.clearRoutes();
 
     const points = coords.map(L.latLng);
-    console.log(points);
+    //console.log(points);
 
     try {
       this.routeControl = L.Routing.control({
