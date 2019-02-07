@@ -26,14 +26,14 @@ export class ListChartReportComponent implements OnInit {
       );
   }
 
-  deleteChart(chartIdToDelete){
+  deleteChart(chartIdToDelete) {
     this.tableReportService.deleteChartReport(chartIdToDelete).subscribe(
-      (data) =>{
-        this.chartsList = this.chartsList.filter((chart) => chart.id != chartIdToDelete);
+      (data) => {
+        this.chartsList = this.chartsList.filter((chart) => chart.id !== chartIdToDelete);
       },
       (error) => {
 
-      }      
+      }
     );
   }
 }

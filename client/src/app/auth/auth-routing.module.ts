@@ -19,7 +19,7 @@ const ROUTES: Routes = [
     component: RegisterComponent,
     canActivate: [AnonymousRouteActivatorService]
   }
-]
+];
 
 @NgModule({
   imports: [

@@ -137,6 +137,6 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
     const d = new Date(+dateStr);
     const isoDate = d.toISOString();
     return isoDate.substr(0, 16).replace('T', ' ');
-    
+
   }
 }

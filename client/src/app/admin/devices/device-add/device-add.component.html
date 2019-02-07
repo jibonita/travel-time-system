@@ -1,7 +1,7 @@
 <button *ngIf="!isAddDevice" (click)="loadDeviceModal()" class="btn btn-lg btn-outline-primary" >Add Device </button>
 <button *ngIf="!!isAddDevice"  (click)="loadDeviceModal()"  class="btn btn-warning" >Edit</button>
 
-<div class="card  modal-lg"  [class.highlight]="this.isHighlighted">
+<div class="card  modal-lg"  [class.highlight]="this.isHighlighted"  data-backdrop="static">
     <div class="card-body">
         <app-modal>
             <div class="title">{{ title | sentenceCase}} Device</div>

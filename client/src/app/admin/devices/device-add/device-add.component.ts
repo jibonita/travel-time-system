@@ -32,7 +32,7 @@ export class DeviceAddComponent implements OnInit {
   addDeviceForm: FormGroup;
   closeResult: string;
   title: string;
-  
+
   @Input() isAddDevice: boolean;
   @Input() devid: string;
 
@@ -106,7 +106,7 @@ export class DeviceAddComponent implements OnInit {
     this.devicesService.addDevice(this.addDeviceForm.value).subscribe(
       (data) => {
         this.notificator.success('Device added successfully!');
-        
+
         this.emitNewDeviceAddedEvent(data);
         this.addDeviceForm.reset();
         this.modal.close();

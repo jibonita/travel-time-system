@@ -6,21 +6,21 @@ import { TableReportModel } from '../models/table-report.model';
 
 @Injectable()
 export class TableReportService {
+
+  public constructor(private readonly requester: RequesterService) {}
   private chartDevicesSourse$ = new BehaviorSubject('');
   currentChartDevices$ = this.chartDevicesSourse$.asObservable();
+
+  private tableListStateSource$ = new BehaviorSubject(null);
+  currentTableListState$ = this.tableListStateSource$.asObservable();
 
   changeDevices(message: string) {
     this.chartDevicesSourse$.next(message);
   }
 
-  private tableListStateSource$ = new BehaviorSubject(null);
-  currentTableListState$ = this.tableListStateSource$.asObservable();
-
   changeTableListState(state: TableReportModel[]) {
-    this.tableListStateSource$.next(state)
+    this.tableListStateSource$.next(state);
   }
-
-  public constructor(private readonly requester: RequesterService) {}
 
   public createTableReport(tableReport: TableReportModel): Observable<TableReportModel[]> {
     return this.requester.post('http://localhost:3000/table-reports', JSON.stringify(tableReport));
@@ -50,7 +50,7 @@ export class TableReportService {
 
   public createChartReport(id, chartReport: ChartReportDTO): Observable<any> {
     console.log(chartReport);
-    
+
     return this.requester.post(`http://localhost:3000/table-reports/${id}/chart-reports`, JSON.stringify(chartReport));
   }
 

@@ -51,12 +51,12 @@ export class DevicesListComponent implements OnInit {
     );
   }
 
-  editDevice(device){
+  editDevice(device) {
     console.log('Edit in device-list');
   }
 
-  setDisplay(state){
+  setDisplay(state) {
     return state;
   }
-  
+
 }

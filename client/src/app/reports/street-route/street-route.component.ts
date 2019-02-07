@@ -17,22 +17,22 @@ export class StreetRouteComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    
+
     this.reportDataListenerSubscriber =
       this.reportDataListenerService.currentRouteDraw$.subscribe(
         (data) => {
-            if(data.length > 0){
+            if (data.length > 0) {
               this.mapService.clearRoutes();
-              
+
               this.mapService.showRoute(data);
             }
-            
+
         }
       );
   }
 
 
-  ngOnDestroy(){
-    
+  ngOnDestroy() {
+
   }
 }

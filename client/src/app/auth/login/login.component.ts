@@ -39,11 +39,11 @@ export class LoginComponent implements OnInit {
   public login(): void {
     this.authService.loginUser(this.loginForm.value).subscribe(
       () => {
-        //this.notificator.success('Logged in successfully!');
+        // this.notificator.success('Logged in successfully!');
         this.router.navigate(['/landing']);
       },
       error => {
-        //console.log(error);
+        // console.log(error);
         this.notificator.error(error.error.message, 'Login failed!');
       }
     );

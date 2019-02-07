@@ -74,14 +74,13 @@ export class AuthService {
 
   private isAdmin(): boolean {
     const token = this.getDecodedAccessToken(this.storageService.getItem('token'));
-    return !!token? token.isAdmin : false;
+    return !!token ? token.isAdmin : false;
   }
 
   private getDecodedAccessToken(token: string): any {
-    try{
+    try {
         return jwt_decode(token);
-    }
-    catch(Error){
+    } catch (Error) {
         return null;
     }
   }

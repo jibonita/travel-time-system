@@ -1,5 +1,6 @@
 .chart-container{
     padding: 20px;
+    border: 1px solid #DFDFDF;
 }
 .chart-name {
     display: inline-block;

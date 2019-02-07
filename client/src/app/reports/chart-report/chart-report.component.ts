@@ -14,7 +14,7 @@ export class ChartReportComponent implements OnInit {
   chartId: string;
   isChartDataLoaded = false;
   @Input() chartData;
-  
+
   constructor(
     private readonly notificator: ToastrService,
     private readonly tableReportService: TableReportService) { }
@@ -32,34 +32,34 @@ export class ChartReportComponent implements OnInit {
           this.chartData.startDates.map(date => {
             startDates.push(date.dateInMilliseconds);
           });
-          
+
           const compareChartData = {
             'originID': origin,
             'destinationID': destination,
             'startDates': startDates.join(','),
             'period': period
             };
-          
+
           this.tableReportService.getCompareChartData(compareChartData).subscribe(
                 data => {
                     this.data = data;
                     console.log('doidoha dannite');
-                    console.log(data)
+                    console.log(data);
                     this.isChartDataLoaded = true;
                     this.chartId = this.chartData.id;
                 },
                 (error) => {
                   this.notificator.error(error.message, 'Unable to get data!');
-                  
+
                 },
             );
         },
         (error) => {
           this.notificator.error(error.message, 'Something goes wrong!');
-          
+
         },
         );
-    
+
    }
 
 }
