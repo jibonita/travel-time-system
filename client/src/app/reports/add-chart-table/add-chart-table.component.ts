@@ -51,7 +51,7 @@ export class AddChartTableComponent implements OnInit {
     const slicedDate = date.slice(0, -6);
     const slicedDateBegining = slicedDate.slice(1);
     console.log(slicedDateBegining);
-    
+
     this.allDates.push(slicedDateBegining);
   }
 

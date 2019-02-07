@@ -47,7 +47,7 @@ export class RegisterTechUserComponent implements OnInit {
   public emitNewTechUserAddedEvent(value): void {
     this.newTechUser.emit(value);
   }
-  
+
   public showUserForm(): void {
     this.modal.open();
   }

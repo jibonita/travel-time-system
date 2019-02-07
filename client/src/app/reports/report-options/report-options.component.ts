@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { TableReportService } from '../services/table-report.service';
 import { TableReportModel } from '../models/table-report.model';
+import { ReportDataListenerService } from '../services/report-data-listener.service';
 
 @Component({
   selector: 'app-report-options',
@@ -14,7 +15,8 @@ export class ReportOptionsComponent implements OnInit {
 
   constructor(
     private readonly notificator: ToastrService,
-    private readonly tableReportService: TableReportService
+    private readonly tableReportService: TableReportService,
+    private readonly reportDataListenerService: ReportDataListenerService
   ) { }
 
   ngOnInit() {
@@ -35,8 +37,19 @@ export class ReportOptionsComponent implements OnInit {
       },
       error => {
         console.log(error);
-        //this.notificator.error(error.message, 'Could not delete the report!');
+        // this.notificator.error(error.message, 'Could not delete the report!');
       }
     );
   }
+
+  viewRouteOnStreetMap(report) {
+    const devices = report.devices.map(this.getLatLonPair);
+
+    this.reportDataListenerService.changeRouteToDraw(devices);
+  }
+
+  getLatLonPair(device) {
+    return [+device.latitude, +device.longitude];
+  }
+
 }

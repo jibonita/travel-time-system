@@ -1,8 +1,8 @@
 <div *ngFor="let report of reportsList">
 
-  <ngb-accordion #acc="ngbAccordion">
+  <ngb-accordion #acc="ngbAccordion"  close-others="false">
     <ngb-panel>
-      <ng-template ngbPanelTitle>
+      <ng-template ngbPanelTitle >
         <span> <b>{{ report.name }}</b> </span>
         <span id="reportoptions">
 

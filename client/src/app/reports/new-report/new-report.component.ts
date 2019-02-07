@@ -29,7 +29,7 @@ export class NewReportComponent implements OnInit {
 
   @ViewChild(МodalComponent) public modal: МodalComponent;
 
- 
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly notificator: ToastrService,

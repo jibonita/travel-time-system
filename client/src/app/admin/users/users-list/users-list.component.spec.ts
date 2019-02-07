@@ -6,7 +6,7 @@ describe('UsersListComponent', () => {
   let USERS;
   let mockUserDataService;
   let mockNotificatorservice;
-  
+
   beforeEach(() => {
     USERS = [
       {email: 'pesho@mail.com'},
@@ -16,7 +16,7 @@ describe('UsersListComponent', () => {
 
     mockUserDataService = jasmine.createSpyObj(['getAllUsers', 'deleteUser']);
     mockNotificatorservice = jasmine.createSpyObj(['success', 'error']);
-    
+
     component = new UsersListComponent(mockUserDataService, mockNotificatorservice);
   });
 

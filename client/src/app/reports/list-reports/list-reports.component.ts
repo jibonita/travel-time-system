@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./list-reports.component.css']
 })
 export class ListReportsComponent implements OnInit {
-  
+
   reportsList: TableReportModel[];
 
   constructor(
@@ -26,7 +26,7 @@ export class ListReportsComponent implements OnInit {
 
       this.tableReportService.currentTableListState$.subscribe(
         (data) => {
-          if(this.reportsList){
+          if (this.reportsList) {
             this.reportsList.unshift(data);
           }
         }
@@ -37,5 +37,5 @@ export class ListReportsComponent implements OnInit {
     console.log('view report map' + reportId);
   }
 
-  
+
 }

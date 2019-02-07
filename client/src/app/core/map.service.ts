@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
- //declare let L;
-//import * as L from 'leaflet';
-//import {Map} from 'leaflet';
+ // declare let L;
+// import * as L from 'leaflet';
+// import {Map} from 'leaflet';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 
@@ -22,7 +22,7 @@ export class MapService {
         latLang = this.defaultLatLon;
       }
       const myMap = L.map(mapId).setView(latLang, zoom);
-      
+
       const mapBoxToken =
         'pk.eyJ1Ijoiamlib25pdGEiLCJhIjoiY2pyYW1sZGphMDJsMjQ2bXJwcXMxNjZkeiJ9.Bq8DniBup0gVphk00oFt5Q';
       const mapBoxTokenDefault =
@@ -39,19 +39,19 @@ export class MapService {
       //   }
       // ).addTo(myMap);
 
-      //L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/mapbox.streets/tiles/{z}/{x}/{y}?access_token=${mapBoxToken}`).addTo(myMap);
+      // L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/mapbox.streets/tiles/{z}/{x}/{y}?access_token=${mapBoxToken}`).addTo(myMap);
 
       L.tileLayer(
         `https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=${mapBoxToken}`,
         {
-          attribution: "",
+          attribution: '',
           maxZoom: 18,
         }
       ).addTo(myMap);
 
 
       this.streetMap = myMap;
-      
+
     } else {
       this.streetMap = null;
     }
@@ -59,23 +59,23 @@ export class MapService {
     return this.streetMap;
   }
 
-  showRoute(coords){
+  showRoute(coords) {
     this.clearRoutes();
 
     const points = coords.map(L.latLng);
-    console.log(points)
-    
+    // console.log(points);
+
     try {
       this.routeControl = L.Routing.control({
         waypoints: points,
-        
+
       }).addTo(this.streetMap);
 
       this.routeControl.hide();
     } catch (error) {
-      console.log('Error in OSRM API')
+      console.log('Error in OSRM API');
     }
-    
+
   }
 
   clearRoutes() {

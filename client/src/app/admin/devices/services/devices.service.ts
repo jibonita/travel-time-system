@@ -24,8 +24,8 @@ export class DevicesService {
 
   public assignDevice(user, devices): Observable<any> {
     const assignDeviceDTO = {
-      "user": user,
-      "devices": devices
+      'user': user,
+      'devices': devices
     };
     return this.requester.post('http://localhost:3000/devices/assign', JSON.stringify(assignDeviceDTO));
   }

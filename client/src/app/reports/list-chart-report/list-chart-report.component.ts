@@ -1,5 +1,5 @@
 import { ChartReportComponent } from './../chart-report/chart-report.component';
-import { Component, OnInit, Input,  AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input,  OnDestroy } from '@angular/core';
 import { TableReportService } from '../services/table-report.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { TableReportService } from '../services/table-report.service';
   templateUrl: './list-chart-report.component.html',
   styleUrls: ['./list-chart-report.component.css']
 })
-export class ListChartReportComponent implements OnInit {
+export class ListChartReportComponent implements OnInit, OnDestroy {
   message: string;
   isChartLoaded = false;
   devicesToCompare;
@@ -19,21 +19,33 @@ export class ListChartReportComponent implements OnInit {
 
   ngOnInit() {
      this.tableReportService.currentChartDevices$.subscribe(
-      message => {
-        this.message = message;
-        this.isChartLoaded = message.length > 0;
+      devices => {
+        // this.message = devices;
+        if (devices.length > 0) {
+          this.isChartLoaded = true;
+          this.devicesToCompare = `( ${devices.split(',').join(' - ')} )`;
+        } else {
+          this.devicesToCompare = '';
+        }
+        // this.isChartLoaded = devices.length > 0;
+        // this.devicesToCompare = `( ${devices.split(',').join(' - ')} )`;
       }
       );
   }
 
-  deleteChart(chartIdToDelete){
+  ngOnDestroy() {
+    this.devicesToCompare = '';
+  }
+
+  deleteChart(chartIdToDelete) {
     this.tableReportService.deleteChartReport(chartIdToDelete).subscribe(
-      (data) =>{
-        this.chartsList = this.chartsList.filter((chart) => chart.id != chartIdToDelete);
+      (data) => {
+        this.chartsList = this.chartsList.filter((chart) => chart.id !== chartIdToDelete);
       },
       (error) => {
 
-      }      
+      }
     );
   }
+
 }

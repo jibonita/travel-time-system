@@ -46,31 +46,31 @@ export class TableReportComponent implements OnInit, OnDestroy {
 
   cellClickedActions(origin, destination) {
     this.viewOnMap(origin, destination);
-    
-    this.loadChart(origin, destination)
+
+    this.loadChart(origin, destination);
   }
 
-  viewOnMap(origin, destination){
+  viewOnMap(origin, destination) {
     const devices = this.report.devices
         .filter(this.searchDevicesByName(origin, destination))
         .map(this.getLatLonPair);
-    
+
     this.mapService.showRoute(devices);
   }
 
   loadChart(origin, destination) {
     this.tableReportService.changeDevices(`${origin},${destination}`);
-  };
+  }
 
-  getLatLonPair(device){
+  getLatLonPair(device) {
     return [+device.latitude, +device.longitude];
   }
 
   searchDevicesByName(origin, destination) {
       const searchDevice = (device) => {
-        return [origin, destination].indexOf(device.name) >-1;
-      }
-      
+        return [origin, destination].indexOf(device.name) > -1;
+      };
+
       return searchDevice;
   }
 
