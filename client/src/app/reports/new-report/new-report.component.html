@@ -38,15 +38,15 @@
                     type="text" 
                     placeholder="Search device..." 
                     formControlName="deviceSearch"
-                    (keyup)="filterList($event.target.value)"  />
+                    (keyup)="filterDevicesList($event.target.value)"  />
                  </div> 
                  <div class="device-wrap col-sm-10">
-                    <div class="row device-name"
+                    <div class="row"
                         *ngFor="let device of addTableReportForm.controls.selectedDevices.controls; let i = index" >
                       <div class="col-sm-3"></div>
                       <div class="form-check col-sm-8 col-centered">
-                          <label formArrayName="selectedDevices">
-                              <input type="checkbox" [formControlName]="i">
+                        <label formArrayName="selectedDevices" class="device-name">                          
+                            <input type="checkbox" [formControlName]="i">
                               {{deviceList[i].name}}
                           </label>
                       </div>

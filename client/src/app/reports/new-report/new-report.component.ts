@@ -120,16 +120,14 @@ export class NewReportComponent implements OnInit {
     return validator;
   }
 
-  filterList(value) {
+  filterDevicesList(value) {
     value = value.toLowerCase();
-    // .filter() is not working
-    const names = document.getElementsByClassName('device-name');
-    for (let i = 0; i < names.length; i++) {
-      const name = names[i];
+    const names = $('.device-name');
+    names.toArray().map((name) => {
       $(name).toggle(
           $(name).text().toLowerCase().indexOf(value) > -1
         );
-
-    }
+    });
+    
    }
 }
