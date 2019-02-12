@@ -59,7 +59,7 @@ export class TableReportComponent implements OnInit, OnDestroy {
   }
 
   loadChart(origin, destination) {
-    this.tableReportService.changeDevices(`${origin},${destination}`);
+    this.reportDataListenerService.changeDevices(`${origin},${destination}`);
   }
 
   getLatLonPair(device) {

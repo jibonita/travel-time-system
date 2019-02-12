@@ -47,10 +47,10 @@ export class AddChartTableComponent implements OnInit {
 
   addNewDate(newDates) {
     const date = JSON.stringify(newDates);
-    console.log(date);
+    //console.log(date);
     const slicedDate = date.slice(0, -6);
     const slicedDateBegining = slicedDate.slice(1);
-    console.log(slicedDateBegining);
+    //console.log(slicedDateBegining);
 
     this.allDates.push(slicedDateBegining);
   }
@@ -78,9 +78,11 @@ export class AddChartTableComponent implements OnInit {
         this.notificator.success('Chart created successfully!');
         // TODO: UPDATE TABLE REPORT LIST WITH THE NEW REPORT
         console.log(data);
+        this.modalService.dismissAll()
       },
       error => {
         this.notificator.error(error.message, 'Chart creation failed!');
+        this.modalService.dismissAll()
       }
     );
 

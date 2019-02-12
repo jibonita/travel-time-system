@@ -36,8 +36,7 @@ export class ReportOptionsComponent implements OnInit {
         console.log(this.reportsList);
       },
       error => {
-        console.log(error);
-        // this.notificator.error(error.message, 'Could not delete the report!');
+        this.notificator.error(error.message, 'Could not delete the report!');
       }
     );
   }

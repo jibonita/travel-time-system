@@ -28,7 +28,14 @@ import { ReportDataListenerService } from './services/report-data-listener.servi
     AddChartTableComponent,
     StreetRouteComponent
   ],
-  imports: [CommonModule, SharedModule, ReactiveFormsModule, NgbModule, OwlDateTimeModule, OwlNativeDateTimeModule, FormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
+    NgbModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    FormsModule],
   providers: [DevicesService, TableReportService, ReportDataListenerService],
   exports: [NewReportComponent, ListReportsComponent, StreetRouteComponent]
 })

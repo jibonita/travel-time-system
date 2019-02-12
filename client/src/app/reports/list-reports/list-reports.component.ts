@@ -2,6 +2,7 @@ import { TableReportModel } from './../models/table-report.model';
 import { TableReportService } from './../services/table-report.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { ReportDataListenerService } from '../services/report-data-listener.service';
 
 @Component({
   selector: 'app-list-reports',
@@ -11,10 +12,12 @@ import { ToastrService } from 'ngx-toastr';
 export class ListReportsComponent implements OnInit {
 
   reportsList: TableReportModel[];
+  reportsListLoadedStatus: Boolean[];
 
   constructor(
     private readonly notificator: ToastrService,
-    private readonly tableReportService: TableReportService
+    private readonly tableReportService: TableReportService, 
+    private readonly reportDataListenerService: ReportDataListenerService
   ) { }
 
   ngOnInit() {
@@ -24,7 +27,7 @@ export class ListReportsComponent implements OnInit {
          }
       );
 
-      this.tableReportService.currentTableListState$.subscribe(
+      this.reportDataListenerService.currentTableListState$.subscribe(
         (data) => {
           if (this.reportsList) {
             this.reportsList.unshift(data);

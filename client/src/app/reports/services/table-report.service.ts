@@ -8,20 +8,7 @@ import { TableReportModel } from '../models/table-report.model';
 export class TableReportService {
 
   public constructor(private readonly requester: RequesterService) {}
-  private chartDevicesSourse$ = new BehaviorSubject('');
-  currentChartDevices$ = this.chartDevicesSourse$.asObservable();
-
-  private tableListStateSource$ = new BehaviorSubject(null);
-  currentTableListState$ = this.tableListStateSource$.asObservable();
-
-  changeDevices(message: string) {
-    this.chartDevicesSourse$.next(message);
-  }
-
-  changeTableListState(state: TableReportModel[]) {
-    this.tableListStateSource$.next(state);
-  }
-
+  
   public createTableReport(tableReport: TableReportModel): Observable<TableReportModel[]> {
     return this.requester.post('http://localhost:3000/table-reports', JSON.stringify(tableReport));
   }

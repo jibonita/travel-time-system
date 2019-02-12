@@ -1,7 +1,4 @@
 import { Injectable, OnInit } from '@angular/core';
- // declare let L;
-// import * as L from 'leaflet';
-// import {Map} from 'leaflet';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 
@@ -63,7 +60,6 @@ export class MapService {
     this.clearRoutes();
 
     const points = coords.map(L.latLng);
-    // console.log(points);
 
     try {
       this.routeControl = L.Routing.control({

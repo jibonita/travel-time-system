@@ -2,6 +2,7 @@ import { TableReportService } from './../services/table-report.service';
 import { TableReportModel } from './../models/table-report.model';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { ReportDataListenerService } from '../services/report-data-listener.service';
 
 @Component({
   selector: 'app-chart-report',
@@ -17,11 +18,12 @@ export class ChartReportComponent implements OnInit {
 
   constructor(
     private readonly notificator: ToastrService,
-    private readonly tableReportService: TableReportService) { }
+    private readonly tableReportService: TableReportService, 
+    private readonly reportDataListenerService: ReportDataListenerService) { }
 
   ngOnInit() {
 
-    this.tableReportService.currentChartDevices$.subscribe(
+    this.reportDataListenerService.currentChartDevices$.subscribe(
         message => {
           this.isChartDataLoaded = false;
 
@@ -43,13 +45,13 @@ export class ChartReportComponent implements OnInit {
           this.tableReportService.getCompareChartData(compareChartData).subscribe(
                 data => {
                     this.data = data;
-                    console.log('doidoha dannite');
-                    console.log(data);
+                    // console.log('doidoha dannite');
+                    // console.log(data);
                     this.isChartDataLoaded = true;
                     this.chartId = this.chartData.id;
                 },
                 (error) => {
-                  this.notificator.error(error.message, 'Unable to get data!');
+                  this.notificator.error(error.message, 'Unable to get chart data!');
 
                 },
             );

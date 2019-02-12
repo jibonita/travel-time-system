@@ -2,3 +2,7 @@
     height: 150px;
     overflow: auto;
 }
+.map-container{
+    height: 150px;
+    background: grey;
+}

@@ -1,69 +1,62 @@
-
-<div class="card"  (click)="showNewReportForm()" [class.highlight]="this.isHighlighted">
-  <button class="btn btn-lg btn-outline-primary" >New Travel Time Route</button>
+<div class="card" (click)="showNewReportForm()" [class.highlight]="this.isHighlighted">
+  <button class="btn btn-lg btn-outline-primary">New Travel Time Route</button>
   <div class="card-body">
-      <app-modal>
-        <div class="title">{{ this.title }}</div>
-        <div class="body">
-          <form [formGroup]="addTableReportForm">
-            <div class="form-group row">
-                  <div class="col-sm-1"></div>
-                  <label class="input-group-text col-sm-2" for="name">Name</label>
-                  <input  required 
-                    class="form-control col-sm-8" 
-                    id="name" 
-                    type="text" 
-                    placeholder="device name..." 
-                    formControlName="name" />
-                  <div class="col-sm-1" [hidden]="!(this.addTableReportForm.get('name').hasError('required') && this.addTableReportForm.dirty)"> * </div>
-                
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-1"></div>
-                <label class="input-group-text col-sm-2" for="period">Period</label>
-                <select class="col-sm-8" id="period" formControlName="period" required>
-                    <option *ngFor="let period of periods" [ngValue]="period">
-                        {{ period.name }}
-                      </option>
-                </select>
-                <div class="col-sm-1" [hidden]="!(this.addTableReportForm.get('period').hasError('required') && this.addTableReportForm.dirty)"> * </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                  <div class="col-sm-1"></div>
-                  <label class="input-group-text col-sm-2" for="deviceSearch">Devices</label>
-                  <input 
-                    class="form-control col-sm-8" 
-                    id="deviceSearch" 
-                    type="text" 
-                    placeholder="Search device..." 
-                    formControlName="deviceSearch"
-                    (keyup)="filterDevicesList($event.target.value)"  />
-                 </div> 
-                 <div class="device-wrap col-sm-10">
-                    <div class="row"
-                        *ngFor="let device of addTableReportForm.controls.selectedDevices.controls; let i = index" >
-                      <div class="col-sm-3"></div>
-                      <div class="form-check col-sm-8 col-centered">
-                        <label formArrayName="selectedDevices" class="device-name">                          
-                            <input type="checkbox" [formControlName]="i">
-                              {{deviceList[i].name}}
-                          </label>
-                      </div>
-                    </div>
-                 </div>
-                
-            </div>
-            
-            
-          </form>
+    <app-modal>
+      <div class="title">{{ this.title }}</div>
+      <div class="body">
+        <form [formGroup]="addTableReportForm">
+          <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <label class="input-group-text col-sm-2" for="name">Name</label>
+            <input required class="form-control col-sm-8" id="name" type="text" placeholder="Report name..."
+              formControlName="name" />
+            <div class="col-sm-1" [hidden]="!(this.addTableReportForm.get('name').hasError('required') && this.addTableReportForm.dirty)">
+              * </div>
 
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-1"></div>
+            <label class="input-group-text col-sm-2" for="period">Period</label>
+            <select class="col-sm-8" id="period" formControlName="period" required>
+              <option value="" disabled selected>Select period</option>
+              <option *ngFor="let period of periods" [ngValue]="period">
+                {{ period.name }}
+              </option>
+            </select>
+            <div class="col-sm-1" [hidden]="!(this.addTableReportForm.get('period').hasError('required') && this.addTableReportForm.dirty)">
+              * </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <label class="input-group-text col-sm-2" for="deviceSearch">Devices</label>
+              <input class="form-control col-sm-8" id="deviceSearch" type="text" placeholder="Search device..."
+                formControlName="deviceSearch" (keyup)="filterDevicesList($event.target.value)" />
+            </div>
+            <div class="device-wrap col-sm-10">
+              <div class="row" *ngFor="let device of addTableReportForm.controls.selectedDevices.controls; let i = index">
+                <div class="col-sm-3"></div>
+                <div class="form-check col-sm-8 col-centered">
+                  <label formArrayName="selectedDevices" class="device-name">
+                    <input type="checkbox" [formControlName]="i">
+                    {{deviceList[i].name}}
+                  </label>
+                </div>
+              </div>
+            </div>
 
+          </div>
+        </form>
+
+        <div class="map-container">
+          <app-street-map [mapid]="'alldev'"></app-street-map>
         </div>
-        <div class="footer">
-          <button class="btn btn-primary" (click)="createReport()"
-          [disabled]="this.addTableReportForm.invalid" type="submit" >Save</button>
+      </div>
+      <div class="footer">
+        <div>
+          <button class="btn btn-primary" (click)="createReport()" [disabled]="this.addTableReportForm.invalid" type="submit">Save</button>
         </div>
-      </app-modal>
-    </div>
+      </div>
+    </app-modal>
   </div>
+</div>

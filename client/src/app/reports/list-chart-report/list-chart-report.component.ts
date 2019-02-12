@@ -1,6 +1,7 @@
 import { ChartReportComponent } from './../chart-report/chart-report.component';
 import { Component, OnInit, Input,  OnDestroy } from '@angular/core';
 import { TableReportService } from '../services/table-report.service';
+import { ReportDataListenerService } from '../services/report-data-listener.service';
 
 @Component({
   selector: 'app-list-chart-report',
@@ -15,10 +16,11 @@ export class ListChartReportComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly tableReportService: TableReportService,
+    private readonly reportDataListenerService: ReportDataListenerService
   ) { }
 
   ngOnInit() {
-     this.tableReportService.currentChartDevices$.subscribe(
+     this.reportDataListenerService.currentChartDevices$.subscribe(
       devices => {
         // this.message = devices;
         if (devices.length > 0) {

@@ -5,6 +5,7 @@ import { МodalComponent } from 'src/app/shared/modal/modal.component';
 import { DevicesService } from 'src/app/admin/devices/services/devices.service';
 import { TableReportModel } from '../models/table-report.model';
 import { ToastrService } from 'ngx-toastr';
+import { ReportDataListenerService } from '../services/report-data-listener.service';
 
 @Component({
   selector: 'app-new-report',
@@ -34,7 +35,8 @@ export class NewReportComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly notificator: ToastrService,
     private readonly devicesService: DevicesService,
-    private readonly tableReportService: TableReportService) { }
+    private readonly tableReportService: TableReportService,
+    private readonly reportDataListenerService: ReportDataListenerService) { }
 
   ngOnInit() {
     this.devicesService.getAllDevices().subscribe(
@@ -79,7 +81,7 @@ export class NewReportComponent implements OnInit {
     this.tableReportService.createTableReport(tableReport).subscribe(
       (data) => {
         this.notificator.success('Report created successfully!');
-        this.tableReportService.changeTableListState(data);
+        this.reportDataListenerService.changeTableListState(data);
       },
       error => {
         this.notificator.error(error.message, 'Report creation failed!');
