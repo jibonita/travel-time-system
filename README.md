@@ -55,9 +55,9 @@ in the respective folders frontend and backend.
 
 ## Authors<a name ="authors"></a>
 
-Osman Yumer   - [o.yumer](#https://gitlab.com/o.yumer) 
+Osman Yumer   - [o.yumer](https://gitlab.com/o.yumer) 
 
-Stefka Marinova - [jibonita](#https://gitlab.com/jibonita)
+Stefka Marinova - [jibonita](https://gitlab.com/jibonita)
 
 ## License<a name ="license"></a>
 
@@ -80,4 +80,5 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
- 
+Trello to manage tasks
+[travel-time-system](https://trello.com/b/uFogqGci/travel-time-system)
