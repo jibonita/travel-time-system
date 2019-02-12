@@ -55,9 +55,9 @@ in the respective folders frontend and backend.
 
 ## Authors<a name ="authors"></a>
 
-Osman Yumer   - [o.yumer](#https://gitlab.com/o.yumer) 
+Osman Yumer   - [o.yumer](https://gitlab.com/o.yumer) 
 
-Stefka Marinova - [jibonita](#https://gitlab.com/jibonita)
+Stefka Marinova - [jibonita](https://gitlab.com/jibonita)
 
 ## License<a name ="license"></a>
 
@@ -81,4 +81,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 Trello to manage tasks
-<a url="https://trello.com/b/uFogqGci/travel-time-system">travel-time-system </a>
+[travel-time-system](https://trello.com/b/uFogqGci/travel-time-system)
